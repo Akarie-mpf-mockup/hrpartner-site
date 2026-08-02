@@ -1,0 +1,128 @@
+/* トークンは robottte-site/src/index.css を踏襲（同じブランドとして揃えるため） */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=M+PLUS+1p:wght@300;400;500;700;800&display=swap');
+
+:root {
+  --bg: #FFFFFF;
+  --bg2: #F4F8FB;
+  --surface: #FFFFFF;
+  --surface2: #EBF5FA;
+  --border: rgba(0, 160, 232, 0.15);
+  --border-light: rgba(0, 0, 0, 0.08);
+  --text: #0F1923;
+  --text-muted: #4A5568;
+  --text-dim: #8896A4;
+  --accent: #00A0E8;
+  --accent-dark: #0080C0;
+  --accent-light: #E6F5FC;
+  --warn: #B45309;
+  --warn-light: #FFF7ED;
+  --font-sans: 'Inter', 'M PLUS 1p', sans-serif;
+  --font-body: 'M PLUS 1p', 'Inter', sans-serif;
+  --nav-h: 72px;
+  --max-w: 1120px;
+  --radius: 12px;
+  --shadow: 0 4px 24px rgba(0, 160, 232, 0.10);
+  --shadow-md: 0 12px 48px rgba(0, 160, 232, 0.18);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 17px; scroll-padding-top: var(--nav-h); }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  line-height: 1.8;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+
+.container { max-width: var(--max-w); margin: 0 auto; padding: 0 40px; }
+.section { padding: 104px 0; }
+.section--alt { background: var(--bg2); }
+
+.label {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.label::before {
+  content: '';
+  width: 20px; height: 2px;
+  background: var(--accent);
+  border-radius: 1px;
+}
+
+.section-title {
+  font-family: var(--font-sans);
+  font-size: clamp(1.9rem, 3.4vw, 2.7rem);
+  font-weight: 800;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+}
+.section-lead {
+  margin-top: 20px;
+  max-width: 60ch;
+  color: var(--text-muted);
+  font-size: 1.02rem;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  padding: 32px;
+}
+.card--accent { border-color: var(--border); box-shadow: var(--shadow); }
+
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 40px; }
+
+.btn {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.98rem;
+  padding: 15px 32px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+  cursor: pointer;
+}
+.btn--primary { background: var(--accent); color: #fff; box-shadow: var(--shadow); }
+.btn--primary:hover { background: var(--accent-dark); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+.btn--ghost { border-color: var(--border); color: var(--accent-dark); background: #fff; }
+.btn--ghost:hover { background: var(--accent-light); }
+
+.tablewrap { margin-top: 40px; overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+th, td { text-align: left; padding: 16px 18px; border-bottom: 1px solid var(--border-light); vertical-align: top; }
+th { font-weight: 700; color: var(--text-muted); font-size: 0.84rem; letter-spacing: .04em; background: var(--bg2); }
+tr.self td { background: var(--accent-light); font-weight: 700; }
+
+.note {
+  margin-top: 28px;
+  padding: 20px 24px;
+  background: var(--bg2);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+  color: var(--text-muted);
+  font-size: 0.94rem;
+}
+
+@media (max-width: 860px) {
+  .cols { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  html { font-size: 16px; }
+  .container { padding: 0 22px; }
+  .section { padding: 72px 0; }
+  .card { padding: 24px; }
+}
