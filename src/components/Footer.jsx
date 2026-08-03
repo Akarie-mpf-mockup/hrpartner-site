@@ -1,7 +1,12 @@
 // 会社概要：robottte-site の About.jsx（companyInfo）から流用。2026-08-03 時点。
 // 投資家向けの項目（累計調達額・メンバー数）はサービスサイトには載せない。
-// TODO: プライバシーポリシー・特商法は robottte.com にも原文が無い（/privacy /tokushoho とも 404）。
-//       新規に用意する必要がある。GA4 を入れたのでプライバシーポリシーは公開前に要る（01_… 第4部 #6）。
+// プライバシーポリシーは**会社共通の既成規程**（弁護士確認済み）を参照する。2026-08-03 決定。
+//   https://hr-monster.io/privacy/ ＝「株式会社robottte プライバシーポリシー」
+//   第7条にクッキーの規定があり、GA4 による統計データ取得・ブラウザでの無効化まで網羅している。
+// ⚠ 文面をこちらに複製しないこと。2箇所に持つと必ず食い違う（ops-tools LESSONS #0016）。
+//   規程が改定されてもリンクなら自動で追随する。
+// 特商法表記は対象外と整理（オンラインでの販売・決済がなく、問い合わせ導線のみ）。
+const PRIVACY_URL = 'https://hr-monster.io/privacy/'
 const companyInfo = [
   ['会社名', '株式会社robottte'],
   ['設立', '2021年8月'],
@@ -33,6 +38,11 @@ export default function Footer() {
             <li><a href="#method">調べ方</a></li>
             <li><a href="#pricing">費用</a></li>
             <li><a href="#contact">お問い合わせ</a></li>
+            <li>
+              <a href={PRIVACY_URL} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent-dark)' }}>
+                プライバシーポリシー
+              </a>
+            </li>
           </ul>
         </div>
 
