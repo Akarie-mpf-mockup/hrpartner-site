@@ -1,19 +1,30 @@
 <!DOCTYPE html>
 <html lang="ja">
   <head>
-    <!-- TODO: GA4 の測定IDを決める。robottte-site は G-5PFKLSY62Y を使用中。
-         同じプロパティに相乗りさせるか、別プロパティを切るかは未決。 -->
+    <!-- GA4：robottte-site と同じプロパティに相乗りさせる（2026-08-03 決定）。
+         別プロパティを切るには GA 管理画面での作成が要るため、まずは相乗りで開始する。
+         hostname ディメンション（hrpartner.robottte.com / www.robottte.com）で分離して見られる。
+         分けたくなったら下の2箇所の測定IDを差し替えるだけでよい。 -->
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>HRパートナー | 求人にお金をかける前に、求人票のどこが負けているかを</title>
+    <title>HRパートナー | 求人票のどこが負けているかを測り、書き換える</title>
     <meta name="description" content="市場・競合・自社を実際に測ってから、求人原稿の書き換え、採用ページの用意、応募導線の点検までを行います。助言ではなく、こちらが手を動かします。月額30,000円から。運営：robottte株式会社" />
-    <meta property="og:title" content="HRパートナー | 求人にお金をかける前に、求人票のどこが負けているかを" />
+    <meta property="og:title" content="HRパートナー | 求人票のどこが負けているかを測り、書き換える" />
     <meta property="og:description" content="市場・競合・自社を実際に測ってから、求人原稿の書き換えから採用ページの用意までを代わりに行う採用支援です。" />
     <meta property="og:url" content="https://hrpartner.robottte.com/" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="ja_JP" />
     <link rel="canonical" href="https://hrpartner.robottte.com/" />
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5PFKLSY62Y"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5PFKLSY62Y');
+    </script>
   </head>
   <body>
     <div id="root"></div>

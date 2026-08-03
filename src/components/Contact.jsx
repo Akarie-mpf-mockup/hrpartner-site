@@ -1,7 +1,7 @@
 // CTA は1本に絞る＝「採用ページの技術診断」（01_コンセプトとページ構成 §2-1 の注記）。
-// TODO: フォームの送信先が未決。robottte-site の Contact.jsx（送信方法）を確認してから実装する。
-//       暫定でメールリンクにしている。
-const MAIL = 'support@hr-monster.io'
+// 送信先は support@robottte.com に決定（2026-08-03）。
+// robottte-site の Contact.jsx も外部フォームではなくメールリンク（kiban@robottte.com）で、方式は揃っている。
+const MAIL = 'support@robottte.com'
 
 export default function Contact() {
   const subject = encodeURIComponent('採用ページの診断のお願い')
