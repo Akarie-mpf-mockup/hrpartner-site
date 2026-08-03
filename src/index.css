@@ -28,8 +28,8 @@
       作り直し方: ページを開いて、明朝で描画されている文字を集める
       検査コマンド: node scripts/check-font-subset.mjs <preview URL>（不足があれば exit 2）。
       （ページを Playwright で開き、computedStyle の fontFamily が Shippori を含む
-      テキストノードの文字を集めて重複を除く。2026-08-03 時点で 173 文字）。 */
-@import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@600&display=swap&text=01234EHMOR%E2%91%A0%E2%91%A1%E2%91%A2%E2%91%A3%E2%91%A4%E2%91%A5%E2%91%A6%E2%91%A7%E2%91%A8%E2%91%A9%E2%91%AA%E2%91%AB%E3%80%81%E3%80%82%E3%81%84%E3%81%86%E3%81%88%E3%81%8A%E3%81%8B%E3%81%8C%E3%81%8D%E3%81%8F%E3%81%93%E3%81%94%E3%81%95%E3%81%98%E3%81%99%E3%81%9A%E3%81%9B%E3%81%9D%E3%81%9F%E3%81%A0%E3%81%A1%E3%81%A4%E3%81%A6%E3%81%A7%E3%81%A8%E3%81%AB%E3%81%AE%E3%81%AF%E3%81%B8%E3%81%BE%E3%82%80%E3%82%81%E3%82%82%E3%82%84%E3%82%88%E3%82%89%E3%82%8A%E3%82%8B%E3%82%8C%E3%82%8D%E3%82%92%E3%82%B3%E3%82%B8%E3%82%B9%E3%83%88%E3%83%8A%E3%83%90%E3%83%91%E3%83%9A%E3%83%9F%E3%83%A9%E3%83%B3%E3%83%B6%E3%83%BB%E3%83%BC%E4%B8%80%E4%BA%BA%E4%BB%B6%E4%BC%9A%E4%BD%8D%E4%BE%9B%E4%BF%A1%E5%82%99%E5%83%8D%E5%85%A5%E5%86%86%E5%87%BA%E5%88%86%E5%89%8D%E5%8A%B4%E5%8B%95%E5%8B%9F%E5%8D%98%E5%8E%9F%E5%8F%96%E5%8F%A3%E5%90%88%E5%91%8A%E5%95%86%E5%95%8F%E5%9B%B2%E5%9C%8F%E5%A0%B1%E5%A0%B4%E5%A4%96%E5%AE%9A%E5%AE%9F%E5%AF%BE%E5%B8%82%E5%BD%93%E5%BD%A2%E5%BE%A1%E5%BF%9C%E6%83%85%E6%85%8B%E6%89%8B%E6%8B%A0%E6%8C%81%E6%8E%A1%E6%8F%90%E6%95%B0%E6%95%B4%E6%96%B9%E6%9B%B8%E6%9C%88%E6%9C%AC%E6%9D%A1%E6%9D%A5%E6%A1%88%E6%A4%9C%E6%A6%82%E6%AC%A1%E6%AF%8E%E6%AF%94%E6%B1%BA%E6%B5%81%E6%B8%AC%E6%BA%96%E7%82%B9%E7%89%B9%E7%94%A8%E7%99%BA%E7%9B%B8%E7%A4%BE%E7%A8%BF%E7%AB%B6%E7%AD%94%E7%AF%84%E7%B4%A2%E7%B5%A6%E7%B7%92%E7%BD%AE%E8%87%AA%E8%91%89%E8%A1%8C%E8%A6%81%E8%A6%8B%E8%A8%80%E8%A8%8E%E8%A8%AD%E8%AA%8D%E8%AD%98%E8%B1%A1%E8%B2%BB%E8%B3%AA%E8%BC%83%E9%9A%9B%E9%9C%80%E9%9C%B2%E9%A0%BC%E9%A1%98');
+      テキストノードの文字を集めて重複を除く。2026-08-03 時点で 197 文字）。 */
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@600&display=swap&text=.01234ACEFHMOPQRSacdefghinopqrstux%E2%91%A0%E2%91%A1%E2%91%A2%E2%91%A3%E2%91%A4%E2%91%A5%E2%91%A6%E2%91%A7%E2%91%A8%E2%91%A9%E2%91%AA%E2%91%AB%E3%80%81%E3%80%82%E3%81%84%E3%81%86%E3%81%88%E3%81%8A%E3%81%8B%E3%81%8C%E3%81%8D%E3%81%8F%E3%81%93%E3%81%94%E3%81%95%E3%81%98%E3%81%99%E3%81%9A%E3%81%9B%E3%81%9D%E3%81%9F%E3%81%A0%E3%81%A1%E3%81%A4%E3%81%A6%E3%81%A7%E3%81%A8%E3%81%AB%E3%81%AE%E3%81%AF%E3%81%B8%E3%81%BE%E3%82%80%E3%82%81%E3%82%82%E3%82%84%E3%82%88%E3%82%89%E3%82%8A%E3%82%8B%E3%82%8C%E3%82%8D%E3%82%92%E3%82%B3%E3%82%B8%E3%82%B9%E3%83%88%E3%83%8A%E3%83%90%E3%83%91%E3%83%9A%E3%83%9F%E3%83%A9%E3%83%B3%E3%83%B6%E3%83%BB%E3%83%BC%E4%B8%80%E4%BA%BA%E4%BB%B6%E4%BC%9A%E4%BD%8D%E4%BE%9B%E4%BF%A1%E5%82%99%E5%83%8D%E5%85%A5%E5%86%86%E5%87%BA%E5%88%86%E5%89%8D%E5%8A%B4%E5%8B%95%E5%8B%9F%E5%8D%98%E5%8E%9F%E5%8F%96%E5%8F%A3%E5%90%88%E5%91%8A%E5%95%86%E5%95%8F%E5%9B%B2%E5%9C%8F%E5%A0%B1%E5%A0%B4%E5%A4%96%E5%AE%9A%E5%AE%9F%E5%AF%BE%E5%B8%82%E5%BD%93%E5%BD%A2%E5%BE%A1%E5%BF%9C%E6%83%85%E6%85%8B%E6%89%8B%E6%8B%A0%E6%8C%81%E6%8E%A1%E6%8F%90%E6%95%B0%E6%95%B4%E6%96%B9%E6%9B%B8%E6%9C%88%E6%9C%AC%E6%9D%A1%E6%9D%A5%E6%A1%88%E6%A4%9C%E6%A6%82%E6%AC%A1%E6%AF%8E%E6%AF%94%E6%B1%BA%E6%B5%81%E6%B8%AC%E6%BA%96%E7%82%B9%E7%89%B9%E7%94%A8%E7%99%BA%E7%9B%B8%E7%A4%BE%E7%A8%BF%E7%AB%B6%E7%AD%94%E7%AF%84%E7%B4%A2%E7%B5%A6%E7%B7%92%E7%BD%AE%E8%87%AA%E8%91%89%E8%A1%8C%E8%A6%81%E8%A6%8B%E8%A8%80%E8%A8%8E%E8%A8%AD%E8%AA%8D%E8%AD%98%E8%B1%A1%E8%B2%BB%E8%B3%AA%E8%BC%83%E9%9A%9B%E9%9C%80%E9%9C%B2%E9%A0%BC%E9%A1%98');
 
 :root {
   /* 地 —— 純白をやめ、生成りにする */
@@ -98,11 +98,31 @@ body {
 a { color: inherit; text-decoration: none; }
 ul { list-style: none; }
 
+/* ── 背面のアート ─────────────────────────────────────────────
+   画面1枚ぶんだけを fixed で貼る（全長14,000px 分の canvas は持たない）。
+   参考 lab/05 と同じく、アートは最下部まで背面に居続ける。 */
+.field { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+.field canvas {
+  position: absolute; inset: 0;
+  /* 合成レイヤーに固定する。fixed の大きな面はスクロールごとに再描画され得るため、
+     自前のレイヤーに逃がして「スクロールしても塗り直さない」状態にする。
+     実測: p95 が 33ms（30fps）に落ちるコマが出ていた。 */
+  transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+}
+/* 各セクションの描画を内部に閉じ込め、上下のセクションを巻き込んだ再計算を防ぐ */
+main > section { contain: paint; }
+/* 本文はアートの上。セクションは塗らない（塗ると背面が消える） */
+#root > header, #root > main, #root > footer { position: relative; z-index: 1; }
+
 .container { max-width: var(--max-w); margin: 0 auto; padding: 0 48px; }
 
 /* 余白を大きく。緩急のため --tight / --wide を用意する */
 .section { padding: 152px 0; position: relative; }
-.section--alt { background: var(--bg2); }
+/* ⚠ 塗らない。背面のアートを消さないため。奇数偶数の差は余白だけで付ける
+   （旧: background: var(--bg2)） */
+.section--alt { background: transparent; }
 .section--tight { padding: 104px 0; }
 .section--wide { padding: 200px 0; }
 
@@ -126,10 +146,29 @@ ul { list-style: none; }
   background: var(--accent);
 }
 
+/* セクションの頭 —— 参考 lab/05 の「02 —— Company」型。
+   等幅の番号＋罫＋大きな欧文セリフ。日本語の見出しは下の h2 が持つ（意味づけを欧文に渡さない）。 */
+.shead { display: flex; align-items: center; gap: 20px; margin-bottom: 22px; }
+.shead__idx {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  color: var(--text-dim);
+}
+.shead__rule { width: 56px; height: 1px; background: var(--accent); flex: none; }
+.shead__en {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 3.6vw, 2.9rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+}
+
 /* 大見出し —— 明朝・細め・大きく。太さ800 をやめる */
 .section-title {
   font-family: var(--font-display);
-  font-size: clamp(1.85rem, 3.6vw, 2.9rem);
+  font-size: clamp(1.5rem, 2.6vw, 2.05rem);
   font-weight: 600;
   line-height: 1.5;
   letter-spacing: 0.01em;
@@ -152,12 +191,14 @@ ul { list-style: none; }
 
 /* カード —— 影と角丸をやめ、細い罫だけにする */
 .card {
-  background: var(--surface);
-  border: 1px solid var(--rule-soft);
+  /* 背面のアートを透かす。塗り切ると lab/05 の「地の上に文字が乗る」感じが消える。
+     ⚠ backdrop-filter は使わない（カード数ぶん GPU 負荷が乗りスクロールが重くなる） */
+  background: rgba(252, 250, 246, 0.62);
+  border: 1px solid transparent;
   border-radius: var(--radius);
   padding: 36px;
 }
-.card--accent { border-color: var(--rule); }
+.card--accent { border-color: var(--rule-soft); }
 
 .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 56px; }
 
@@ -243,8 +284,10 @@ tr.self td:first-child { box-shadow: inset 2px 0 0 var(--accent); }
 /* Hero など reveal の内側にある場合も引けるように */
 .is-in .label::before { width: 32px; }
 
-/* 図版に奥行きを与える（--par は useParallax が書く） */
-.hero-figure { transform: translateY(calc(-40% + var(--par, 0px))); }
+/* 図版の奥行きは .hero-figure__in が持つ（--par は useParallax が書く）。
+   ⚠ 中心寄せ（translate(-50%,-50%)）と parallax を同じ transform に calc で混ぜると
+      宣言ごと無効になり transform: none に落ちた（実測）。要素を2つに分けて役割を分離する。 */
+.hero-figure__in { transform: translateY(var(--par, 0px)); }
 
 /* カードは触ると気配が出る程度に */
 .card { transition: border-color .3s ease, transform .3s ease; }
@@ -252,7 +295,7 @@ tr.self td:first-child { box-shadow: inset 2px 0 0 var(--accent); }
 
 /* 表の行も触れると分かる */
 tbody tr { transition: background .25s ease; }
-tbody tr:hover td { background: rgba(27,25,23,.025); }
+tbody tr:hover td { background: rgba(27,25,23,.035); }
 
 /* ナビの現在地 */
 .nav-links a { position: relative; padding-bottom: 3px; }
@@ -264,13 +307,20 @@ tbody tr:hover td { background: rgba(27,25,23,.025); }
 .nav-links a:hover::after, .nav-links a[data-active='1']::after { transform: scaleX(1); }
 
 /* スクロール表示（framer-motion を使わない自作。IntersectionObserver） */
+/* ⚠ ここで transform を使わない。
+   .reveal は全セクションの要素に機械的に付ける汎用ユーティリティなので、
+   transform を書くと **要素自身の transform を打ち消す**。
+   実際に .hero-figure（中心寄せ translate(-50%,-50%)）・.hero-scroll（translateX(-50%)）・
+   .hero-meta--left（translateY(-50%)）が全部ずれた（`.reveal.is-in` はクラス2つで詳細度が勝つ）。
+   独立した translate プロパティを使えば transform と合成され、衝突しない。
+   （ops-tools LESSONS #0013「汎用的なクラス名を別の意味で再利用しない」と同型の事故） */
 .reveal {
   opacity: 0;
-  transform: translateY(26px);
-  transition: opacity 1s cubic-bezier(.22,.61,.36,1), transform 1s cubic-bezier(.22,.61,.36,1);
-  will-change: opacity, transform;
+  translate: 0 26px;
+  transition: opacity 1s cubic-bezier(.22,.61,.36,1), translate 1s cubic-bezier(.22,.61,.36,1);
+  will-change: opacity, translate;
 }
-.reveal.is-in { opacity: 1; transform: none; }
+.reveal.is-in { opacity: 1; translate: 0 0; }
 
 /* Hero の線画を「描かれる」ように出す。CSS だけ＝0KB（canvas も three.js も使わない） */
 .draw path, .draw line, .draw rect {
@@ -287,11 +337,10 @@ tbody tr:hover td { background: rgba(27,25,23,.025); }
   .draw circle { opacity: var(--o, 1); animation: none; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .reveal { opacity: 1; transform: none; transition: none; }
+  .reveal { opacity: 1; translate: 0 0; transition: none; }
   .hero-mask > span { transform: none; animation: none; }
   .label::before { width: 32px; transition: none; }
   .progress { display: none; }
-  .hero-figure { transform: translateY(-40%); }
   .card:hover { transform: none; }
   html { scroll-behavior: auto; }
 }
@@ -311,4 +360,113 @@ main > section:nth-of-type(odd) { padding-top: 184px; padding-bottom: 184px; }
   .section--tight { padding: 72px 0; }
   .section--wide { padding: 112px 0; }
   .card { padding: 26px; }
+}
+
+/* ── Hero（参考 lab/03・04・05 の骨格）───────────────────────────────
+   画面いっぱい・中央寄せ・文字が図の上・四隅にメタ情報・下端に SCROLL。 */
+.hero {
+  min-height: 100vh;
+  min-height: 100svh;               /* モバイルのアドレスバーで切れないように */
+  display: grid;
+  place-items: center;
+  position: relative;
+  padding: calc(var(--nav-h) + 40px) 48px 120px;
+  text-align: center;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.hero-inner { position: relative; z-index: 2; max-width: 900px; }
+
+.hero-kicker {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.3em;
+  color: var(--text-dim);
+  margin-bottom: 34px;
+}
+.hero-h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.1rem, 5.6vw, 4.1rem);
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+}
+.hero-lead {
+  margin: 40px auto 0;
+  max-width: 46ch;
+  font-size: 0.98rem;
+  color: var(--text-muted);
+  line-height: 2.05;
+}
+.hero-cta { margin-top: 52px; display: flex; flex-wrap: wrap; gap: 32px; justify-content: center; align-items: center; }
+.hero-terms {
+  margin-top: 40px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  color: var(--text-dim);
+}
+
+/* 図は見出しの背面中央（lab/04 の魚と同じ扱い） */
+/* ⚠ 図は**見出しの背面だけ**に収める。中央 50% に大きく置くとリード文と CTA に重なって
+   読めなくなった（実測のスクリーンショットで判明）。lab/04 も魚は見出しの高さに収まっている。 */
+.hero-figure {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  width: min(560px, 62vw);
+  transform: translate(-50%, -50%);
+  opacity: 0.26;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* 四隅のメタ情報 */
+.hero-meta {
+  position: absolute;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  color: var(--text-dim);
+  z-index: 2;
+}
+.hero-meta--tr { top: calc(var(--nav-h) + 28px); right: 48px; }
+.hero-meta--left {
+  left: 48px; top: 50%; transform: translateY(-50%);
+  display: grid; gap: 12px; justify-items: center;
+}
+.hero-meta__num { font-size: 0.95rem; color: var(--ink); letter-spacing: 0.1em; }
+.hero-meta__bar { width: 1px; height: 96px; background: linear-gradient(var(--accent), transparent); }
+.hero-meta--br { right: 48px; bottom: 56px; text-align: right; display: grid; gap: 8px; }
+.hero-meta__idx { color: var(--text-dim); }
+.hero-meta__ja { font-family: var(--font-display); font-size: 1.0rem; letter-spacing: 0.2em; color: var(--ink); }
+.hero-meta__lat { font-family: var(--font-display); font-style: italic; font-size: 0.78rem; letter-spacing: 0.04em; }
+
+/* SCROLL の合図 */
+.hero-scroll {
+  position: absolute; left: 50%; bottom: 34px; transform: translateX(-50%);
+  display: grid; justify-items: center; gap: 10px;
+  font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.3em; color: var(--text-dim);
+  z-index: 2;
+}
+.hero-scroll__line { width: 1px; height: 40px; background: var(--rule); position: relative; overflow: hidden; }
+.hero-scroll__line::after {
+  content: ''; position: absolute; inset: 0; background: var(--accent);
+  animation: scrollCue 2.2s cubic-bezier(.6,0,.4,1) infinite;
+}
+@keyframes scrollCue {
+  0%   { transform: translateY(-100%); }
+  60%  { transform: translateY(100%); }
+  100% { transform: translateY(100%); }
+}
+
+@media (max-width: 820px) {
+  .hero { padding: calc(var(--nav-h) + 24px) 24px 96px; }
+  .hero-meta--tr, .hero-meta--left { display: none; }
+  .hero-meta--br { right: 24px; bottom: 76px; }
+  .hero-line { white-space: normal; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-scroll__line::after { animation: none; transform: translateY(0); opacity: .5; }
+  .hero-figure__in { transform: none; }
 }

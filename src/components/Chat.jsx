@@ -1,3 +1,4 @@
+import SectionHead from './SectionHead'
 // HRチャット＝「従」。単体サービスとして売る書き方にしない。専用CTAは置かない。
 // 出所: 【HRC】エイブリッジ.md:35-39（ペイン）, :62-63（タグ1行・FAQ案の提供）
 // 禁止: 離脱率などの効果数値は手元に無いので書かない（00_素材棚卸 §3-6）。
@@ -13,7 +14,7 @@ export default function Chat() {
   return (
     <section id="chat" className="section">
       <div className="container">
-        <p className="label">Chat</p>
+        <SectionHead idx="04" en="Chat" />
         <h2 className="section-title">採用ページに来た方への、その場の応答</h2>
         <p className="section-sub">タグ1行から始められます。ご準備が整うまで表示されません。</p>
         <p className="section-lead">

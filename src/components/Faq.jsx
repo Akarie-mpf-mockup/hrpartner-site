@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import SectionHead from './SectionHead'
 
 // 出所: 【HRC】エイブリッジ.md:69（タグ埋め込みは開発側の権限が律速）,
 //       0_メニューと価格_松竹梅_20260731.md:23（3ヶ月単位）, :107-110（含まないもの）, :34（1拠点から）
@@ -41,7 +42,7 @@ export default function Faq() {
   return (
     <section id="faq" className="section section--alt">
       <div className="container">
-        <p className="label">FAQ</p>
+        <SectionHead idx="07" en="FAQ" />
         <h2 className="section-title">ご検討の前に、よくいただくご質問</h2>
 
         <div style={{ marginTop: 40, display: 'grid', gap: 12 }}>

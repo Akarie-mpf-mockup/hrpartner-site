@@ -1,3 +1,4 @@
+import SectionHead from './SectionHead'
 // 出所: 共通スライド/採用の外部活用_4つの進め方.yml:74-82（4つの進め方の表）, :126-135（向いている場面）
 // 規約: ◎○△×を使わない／他社の金額・契約条件は載せない（0_メニューと価格_松竹梅_20260731.md:158-163）
 const ROWS = [
@@ -11,7 +12,7 @@ export default function Forms() {
   return (
     <section id="forms" className="section section--alt">
       <div className="container">
-        <p className="label">Approaches</p>
+        <SectionHead idx="01" en="Approaches" />
         <h2 className="section-title">採用を外に頼む、4つの形</h2>
         <p className="section-sub">どれが優れているかではなく、手を動かすのが誰かと、終わったあとに何が残るかが違います。</p>
         <p className="section-lead">

@@ -1,3 +1,4 @@
+import SectionHead from './SectionHead'
 // 出所: 手順①〜⑫.md の全体マップ（市場①②③／競合④〜⑨／自社⑩⑪⑫）と各項目の「目的」「ツール」
 // 規約: 数字には出典と取得日を付ける／取れなかったものは「未取得」と書く
 //
@@ -108,7 +109,7 @@ export default function Method() {
   return (
     <section id="method" className="section section--alt">
       <div className="container">
-        <p className="label">Method</p>
+        <SectionHead idx="03" en="Method" />
         <h2 className="section-title">ご提案の前に行う、12の実測</h2>
         <p className="section-sub">打ち手は、原因が市場・競合・自社のどこにあるかで変わります。</p>
         <p className="section-lead">

@@ -1,4 +1,5 @@
 import { useCountUp } from '../motion'
+import SectionHead from './SectionHead'
 // 出所: 0_メニューと価格_松竹梅_20260731.md:34（単一拠点3万・初期0円）, :23（3ヶ月単位）,
 //       :139-140（課金対象拠点は名前で列挙）, :107-110（含まないもの）
 // 方針: 松竹梅の全表・オプション・上限額は載せない（2026-08-02 決定＝「月額3万円〜」だけ）。
@@ -31,7 +32,7 @@ export default function Pricing() {
   return (
     <section id="pricing" className="section">
       <div className="container">
-        <p className="label">Pricing</p>
+        <SectionHead idx="06" en="Pricing" />
         <h2 className="section-title">対象拠点の数で決まる費用</h2>
         <p className="section-sub">支援の対象に含める事業所を、ご契約のときに名前で挙げて数えます。</p>
 

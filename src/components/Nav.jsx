@@ -2,13 +2,17 @@ import { useEffect, useState } from 'react'
 import { useScrollProgress, useActiveSection } from '../motion'
 
 // HRチャットは独立メニューにしない（従の扱い）。01_コンセプトとページ構成 §2-1 の注記に従う。
+// 参考 lab/05 は「HOME NEWS COMPANY BACKGROUND SERVICES CONTACT」の等幅欧文のみで、
+// 塗りの CTA ボタンを置いていない。その形に合わせる（CTA は Hero と各セクションで受ける）。
+// ⚠ 欧文だけにすると意味が伝わらないので title 属性に日本語を添える。
 const LINKS = [
-  { href: '#forms', label: '4つの形' },
-  { href: '#partner', label: 'できること' },
-  { href: '#method', label: '調べ方' },
-  { href: '#flow', label: '進め方' },
-  { href: '#pricing', label: '費用' },
-  { href: '#faq', label: 'よくある質問' },
+  { href: '#forms', label: 'Approaches', ja: '4つの形' },
+  { href: '#partner', label: 'Scope', ja: 'できること' },
+  { href: '#method', label: 'Method', ja: '調べ方' },
+  { href: '#flow', label: 'Process', ja: '進め方' },
+  { href: '#pricing', label: 'Pricing', ja: '費用' },
+  { href: '#faq', label: 'FAQ', ja: 'よくある質問' },
+  { href: '#contact', label: 'Contact', ja: 'お問い合わせ' },
 ]
 
 const IDS = ['forms', 'partner', 'method', 'flow', 'pricing', 'faq']
@@ -45,22 +49,24 @@ export default function Nav() {
         </a>
 
         <nav style={{ display: 'flex', alignItems: 'center', gap: 26 }}>
-          <ul className="nav-links" style={{ display: 'flex', gap: 26, fontSize: '0.88rem', color: 'var(--text-muted)' }}>
+          {/* 狭い画面では nav-links を隠すため、問い合わせ導線だけは必ず残す
+              （消すと小さい画面から Contact に行けなくなる） */}
+          <a href="#contact" className="nav-contact" title="お問い合わせ">Contact</a>
+
+          <ul className="nav-links">
             {LINKS.map((l) => (
               <li key={l.href}>
                 <a
                   href={l.href}
+                  title={l.ja}
                   data-active={active === l.href.slice(1) ? '1' : '0'}
-                  style={{ transition: 'color .15s', color: active === l.href.slice(1) ? 'var(--ink)' : undefined }}
+                  style={{ color: active === l.href.slice(1) ? 'var(--ink)' : undefined }}
                 >
                   {l.label}
                 </a>
               </li>
             ))}
           </ul>
-          <a href="#contact" className="btn btn--primary" style={{ padding: '11px 22px', fontSize: '0.88rem' }}>
-            採用ページを見てもらう
-          </a>
         </nav>
       </div>
 
@@ -68,7 +74,28 @@ export default function Nav() {
       <div ref={progressRef} className="progress" aria-hidden="true" />
 
       <style>{`
-        @media (max-width: 900px) { .nav-links { display: none !important; } }
+        .nav-links {
+          display: flex;
+          gap: 30px;
+          font-family: var(--font-mono);
+          font-size: 0.66rem;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          color: var(--text-dim);
+        }
+        .nav-contact {
+          display: none;
+          font-family: var(--font-mono);
+          font-size: 0.66rem;
+          letter-spacing: 0.2em;
+          text-transform: uppercase;
+          border-bottom: 1px solid var(--accent);
+          padding-bottom: 3px;
+        }
+        @media (max-width: 980px) {
+          .nav-links { display: none !important; }
+          .nav-contact { display: inline-block; }
+        }
       `}</style>
     </header>
   )

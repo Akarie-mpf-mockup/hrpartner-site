@@ -11,6 +11,10 @@ import { useEffect, useRef, useState } from 'react'
  * 共通の約束:
  *   - スクロールは1つの listener に集約し、rAF で間引く（複数登録すると重くなる）。
  *   - 再描画を避けるため、値は state ではなく ref 経由で直接 style / CSS 変数に書く。
+ *   - ★**スクロール中にレイアウト値を読まない**。`offsetTop` / `getBoundingClientRect()` /
+ *     `scrollHeight` は読むたびにレイアウトを強制する。毎フレーム読むとカクつく
+ *     （実測: 50ms超のコマが9回・最悪116ms 出ていた）。位置は最初と resize 時だけ測って
+ *     数値で持ち、フレーム中は算術だけにする。
  *   - `prefers-reduced-motion` を尊重する。動きを止めても内容は必ず見える形にする。
  */
 
@@ -45,13 +49,25 @@ function onScrollRAF(cb) {
 export function useScrollProgress() {
   const ref = useRef(null)
   useEffect(() => {
-    return onScrollRAF((y) => {
+    // ⚠ scrollHeight をフレーム中に読まない（レイアウト強制）。測り直しは resize と
+    //   遅延読み込み画像の到着時だけでよい。
+    let max = 1
+    const remeasure = () => {
+      max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight)
+    }
+    remeasure()
+    window.addEventListener('resize', remeasure, { passive: true })
+    window.addEventListener('load', remeasure)
+    const t = setTimeout(remeasure, 1500) // 画像や webfont が入って高さが変わったあと
+    const off = onScrollRAF((y) => {
       const el = ref.current
-      if (!el) return
-      const max = document.documentElement.scrollHeight - window.innerHeight
-      const r = max > 0 ? Math.min(1, y / max) : 0
-      el.style.transform = `scaleX(${r})`
+      if (el) el.style.transform = `scaleX(${Math.min(1, y / max)})`
     })
+    return () => {
+      off(); clearTimeout(t)
+      window.removeEventListener('resize', remeasure)
+      window.removeEventListener('load', remeasure)
+    }
   }, [])
   return ref
 }
@@ -66,15 +82,33 @@ export function useActiveSection(ids) {
   useEffect(() => {
     const els = ids.map((id) => document.getElementById(id)).filter(Boolean)
     if (!els.length) return
-    return onScrollRAF(() => {
+
+    // ⚠ offsetTop / offsetHeight をフレーム中に読まない（6要素×毎フレームでレイアウト強制）。
+    //   最初と resize のときだけ測って数値の表にしておく。
+    let box = []
+    const remeasure = () => {
+      box = els.map((el) => {
+        let top = 0, n = el
+        while (n) { top += n.offsetTop; n = n.offsetParent }
+        return { id: el.id, top, bottom: top + el.offsetHeight }
+      })
+    }
+    remeasure()
+    window.addEventListener('resize', remeasure, { passive: true })
+    window.addEventListener('load', remeasure)
+    const t = setTimeout(remeasure, 1500)
+
+    const off = onScrollRAF(() => {
       const mid = window.scrollY + window.innerHeight * 0.4
       let hit = null
-      for (const el of els) {
-        const top = el.offsetTop
-        if (mid >= top && mid < top + el.offsetHeight) { hit = el.id; break }
-      }
+      for (const b of box) if (mid >= b.top && mid < b.bottom) { hit = b.id; break }
       setActive(hit)
     })
+    return () => {
+      off(); clearTimeout(t)
+      window.removeEventListener('resize', remeasure)
+      window.removeEventListener('load', remeasure)
+    }
   }, [ids.join(',')])
   return active
 }
@@ -87,13 +121,31 @@ export function useParallax(speed = 0.06) {
   const ref = useRef(null)
   useEffect(() => {
     if (reduced()) return
-    return onScrollRAF((y) => {
+    // ⚠ getBoundingClientRect() をフレーム中に読まない。要素の文書内での中心を
+    //   最初と resize のときだけ測り、以後は scrollY との差だけで計算する。
+    let docCenter = 0
+    const remeasure = () => {
       const el = ref.current
       if (!el) return
-      const rect = el.getBoundingClientRect()
-      const center = rect.top + rect.height / 2 - window.innerHeight / 2
+      const r = el.getBoundingClientRect()
+      docCenter = r.top + window.scrollY + r.height / 2
+    }
+    remeasure()
+    window.addEventListener('resize', remeasure, { passive: true })
+    window.addEventListener('load', remeasure)
+    const t = setTimeout(remeasure, 1500)
+
+    const off = onScrollRAF((y) => {
+      const el = ref.current
+      if (!el) return
+      const center = docCenter - y - window.innerHeight / 2
       el.style.setProperty('--par', `${(-center * speed).toFixed(1)}px`)
     })
+    return () => {
+      off(); clearTimeout(t)
+      window.removeEventListener('resize', remeasure)
+      window.removeEventListener('load', remeasure)
+    }
   }, [speed])
   return ref
 }

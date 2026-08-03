@@ -1,3 +1,4 @@
+import SectionHead from './SectionHead'
 // 出所: 共通スライド/…yml:52-66（当方で持つこと／御社にお願いすること）, :97-112（月額に含む）
 //       0_メニューと価格_松竹梅_20260731.md:81-91（梅・竹の作業）, :85（ATS内包）, :107-110（含まないもの）
 const OURS = [
@@ -39,7 +40,7 @@ export default function Partner() {
   return (
     <section id="partner" className="section">
       <div className="container">
-        <p className="label">Scope</p>
+        <SectionHead idx="02" en="Scope" />
         <h2 className="section-title">当方が持つ範囲と、御社にお願いする範囲</h2>
         <p className="section-sub">助言をお伝えするだけでも、システムをお渡しするだけでもありません。</p>
         <p className="section-lead">

@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import Particles from './Particles'
 import Nav from './components/Nav'
 import Hero from './components/Hero'
 import Forms from './components/Forms'
@@ -67,6 +68,8 @@ export default function App() {
 
   return (
     <>
+      {/* 背面のアート。全セクションの裏に居続ける（参考 lab/05） */}
+      <Particles />
       <Nav />
       <main>
         <Hero />

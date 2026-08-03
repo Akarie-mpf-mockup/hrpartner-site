@@ -1,3 +1,4 @@
+import SectionHead from './SectionHead'
 // 出所: 0_メニューと価格_松竹梅_20260731.md:74-77（初期費用0円の範囲）, 共通スライド/…yml:116（脚注）
 const STEPS = [
   {
@@ -26,7 +27,7 @@ export default function Flow() {
   return (
     <section id="flow" className="section section--alt">
       <div className="container">
-        <p className="label">Process</p>
+        <SectionHead idx="05" en="Process" />
         <h2 className="section-title">はじめのご報告から、月次の手入れまで</h2>
         <p className="section-sub">初回のご報告から、ご契約後の運用までの流れです。</p>
 
