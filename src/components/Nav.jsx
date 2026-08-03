@@ -9,6 +9,7 @@ const LINKS = [
   { href: '#forms', label: 'Approaches', ja: '4つの形' },
   { href: '#partner', label: 'Scope', ja: 'できること' },
   { href: '#method', label: 'Method', ja: '調べ方' },
+  { href: '#chat', label: 'Chat', ja: 'HRチャット' },
   { href: '#flow', label: 'Process', ja: '進め方' },
   { href: '#pricing', label: 'Pricing', ja: '費用' },
   { href: '#faq', label: 'FAQ', ja: 'よくある質問' },
@@ -44,8 +45,15 @@ export default function Nav() {
         className="container"
         style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 24 }}
       >
-        <a href="#top" style={{ fontFamily: 'var(--font-display)', fontWeight: 600, letterSpacing: '0.04em', fontSize: '1.12rem' }}>
-          HR<span style={{ color: 'var(--accent)' }}>パートナー</span>
+        {/* 2026-08-04: 肩に HRチャットを併記する（ご指示）。
+            ⚠ 引き継ぎ書の決定（2026-08-02）は「HRパートナーが主役／HRチャットは従」で、
+              理由は KPI:167「HRチャットは独立サービスではなくHRモンスターのチャットボット機能の
+              アップセル」＝実績も素材も無い側を主張しすぎない、というもの。
+              併記はその決定を一部変更することになるため、指示書側にも記録した。 */}
+        <a href="#top" className="brand">
+          <span className="brand__a">HRパートナー</span>
+          <span className="brand__slash">／</span>
+          <span className="brand__b">HRチャット</span>
         </a>
 
         <nav style={{ display: 'flex', alignItems: 'center', gap: 26 }}>
@@ -83,6 +91,22 @@ export default function Nav() {
           text-transform: uppercase;
           color: var(--text-dim);
         }
+        .brand {
+          font-family: var(--font-display);
+          font-weight: 600;
+          letter-spacing: 0.04em;
+          font-size: 1.02rem;
+          display: inline-flex;
+          align-items: baseline;
+          gap: 8px;
+          white-space: nowrap;
+        }
+        .brand__slash { color: var(--text-dim); font-size: 0.86rem; }
+        .brand__b { color: var(--accent-text); }
+        @media (max-width: 560px) {
+          .brand__slash, .brand__b { display: none; }
+        }
+
         .nav-contact {
           display: none;
           font-family: var(--font-mono);
@@ -94,7 +118,23 @@ export default function Nav() {
         }
         @media (max-width: 980px) {
           .nav-links { display: none !important; }
-          .nav-contact { display: inline-block; }
+          .brand {
+          font-family: var(--font-display);
+          font-weight: 600;
+          letter-spacing: 0.04em;
+          font-size: 1.02rem;
+          display: inline-flex;
+          align-items: baseline;
+          gap: 8px;
+          white-space: nowrap;
+        }
+        .brand__slash { color: var(--text-dim); font-size: 0.86rem; }
+        .brand__b { color: var(--accent-text); }
+        @media (max-width: 560px) {
+          .brand__slash, .brand__b { display: none; }
+        }
+
+        .nav-contact { display: inline-block; }
         }
       `}</style>
     </header>

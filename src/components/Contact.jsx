@@ -18,9 +18,9 @@ export default function Contact() {
   )
 
   return (
-    <section id="contact" className="section">
+    <section id="contact" className="section section--ink">
       <div className="container">
-        <div className="card card--accent" style={{ padding: 'clamp(36px, 6vw, 72px)', textAlign: 'center' }}>
+        <div style={{ padding: 'clamp(20px, 4vw, 48px) 0', textAlign: 'center' }}>
           <p className="label" style={{ justifyContent: 'center' }}>Contact</p>
           <h2 className="section-title" style={{ maxWidth: '28ch', margin: '0 auto' }}>
             まずは、採用ページを見せていただくところから

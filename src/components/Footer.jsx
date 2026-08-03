@@ -22,8 +22,11 @@ export default function Footer() {
       <div className="container">
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 32, justifyContent: 'space-between', alignItems: 'flex-start' }}>
           <div>
-            <p style={{ fontFamily: 'var(--font-sans)', fontWeight: 800, fontSize: '1.05rem' }}>
-              HR<span style={{ color: 'var(--accent)' }}>パートナー</span>
+            {/* 肩の表記はナビと必ず揃える（2026-08-04 に HRチャットを併記した） */}
+            <p style={{ fontFamily: 'var(--font-display)', fontWeight: 600, fontSize: '1.0rem', letterSpacing: '0.04em' }}>
+              HRパートナー
+              <span style={{ color: 'var(--text-dim)', fontSize: '0.86rem', margin: '0 8px' }}>／</span>
+              <span style={{ color: 'var(--accent-text)' }}>HRチャット</span>
             </p>
             <p style={{ marginTop: 10, fontSize: '0.88rem', color: 'var(--text-muted)' }}>
               運営：株式会社robottte
@@ -36,6 +39,7 @@ export default function Footer() {
           <ul style={{ display: 'grid', gap: 10, fontSize: '0.88rem', color: 'var(--text-muted)' }}>
             <li><a href="#partner">できること</a></li>
             <li><a href="#method">調べ方</a></li>
+            <li><a href="#chat">HRチャット</a></li>
             <li><a href="#pricing">費用</a></li>
             <li><a href="#contact">お問い合わせ</a></li>
             <li>

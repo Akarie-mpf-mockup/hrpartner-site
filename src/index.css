@@ -28,8 +28,8 @@
       作り直し方: ページを開いて、明朝で描画されている文字を集める
       検査コマンド: node scripts/check-font-subset.mjs <preview URL>（不足があれば exit 2）。
       （ページを Playwright で開き、computedStyle の fontFamily が Shippori を含む
-      テキストノードの文字を集めて重複を除く。2026-08-03 時点で 197 文字）。 */
-@import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@600&display=swap&text=.01234ACEFHMOPQRSacdefghinopqrstux%E2%91%A0%E2%91%A1%E2%91%A2%E2%91%A3%E2%91%A4%E2%91%A5%E2%91%A6%E2%91%A7%E2%91%A8%E2%91%A9%E2%91%AA%E2%91%AB%E3%80%81%E3%80%82%E3%81%84%E3%81%86%E3%81%88%E3%81%8A%E3%81%8B%E3%81%8C%E3%81%8D%E3%81%8F%E3%81%93%E3%81%94%E3%81%95%E3%81%98%E3%81%99%E3%81%9A%E3%81%9B%E3%81%9D%E3%81%9F%E3%81%A0%E3%81%A1%E3%81%A4%E3%81%A6%E3%81%A7%E3%81%A8%E3%81%AB%E3%81%AE%E3%81%AF%E3%81%B8%E3%81%BE%E3%82%80%E3%82%81%E3%82%82%E3%82%84%E3%82%88%E3%82%89%E3%82%8A%E3%82%8B%E3%82%8C%E3%82%8D%E3%82%92%E3%82%B3%E3%82%B8%E3%82%B9%E3%83%88%E3%83%8A%E3%83%90%E3%83%91%E3%83%9A%E3%83%9F%E3%83%A9%E3%83%B3%E3%83%B6%E3%83%BB%E3%83%BC%E4%B8%80%E4%BA%BA%E4%BB%B6%E4%BC%9A%E4%BD%8D%E4%BE%9B%E4%BF%A1%E5%82%99%E5%83%8D%E5%85%A5%E5%86%86%E5%87%BA%E5%88%86%E5%89%8D%E5%8A%B4%E5%8B%95%E5%8B%9F%E5%8D%98%E5%8E%9F%E5%8F%96%E5%8F%A3%E5%90%88%E5%91%8A%E5%95%86%E5%95%8F%E5%9B%B2%E5%9C%8F%E5%A0%B1%E5%A0%B4%E5%A4%96%E5%AE%9A%E5%AE%9F%E5%AF%BE%E5%B8%82%E5%BD%93%E5%BD%A2%E5%BE%A1%E5%BF%9C%E6%83%85%E6%85%8B%E6%89%8B%E6%8B%A0%E6%8C%81%E6%8E%A1%E6%8F%90%E6%95%B0%E6%95%B4%E6%96%B9%E6%9B%B8%E6%9C%88%E6%9C%AC%E6%9D%A1%E6%9D%A5%E6%A1%88%E6%A4%9C%E6%A6%82%E6%AC%A1%E6%AF%8E%E6%AF%94%E6%B1%BA%E6%B5%81%E6%B8%AC%E6%BA%96%E7%82%B9%E7%89%B9%E7%94%A8%E7%99%BA%E7%9B%B8%E7%A4%BE%E7%A8%BF%E7%AB%B6%E7%AD%94%E7%AF%84%E7%B4%A2%E7%B5%A6%E7%B7%92%E7%BD%AE%E8%87%AA%E8%91%89%E8%A1%8C%E8%A6%81%E8%A6%8B%E8%A8%80%E8%A8%8E%E8%A8%AD%E8%AA%8D%E8%AD%98%E8%B1%A1%E8%B2%BB%E8%B3%AA%E8%BC%83%E9%9A%9B%E9%9C%80%E9%9C%B2%E9%A0%BC%E9%A1%98');
+      テキストノードの文字を集めて重複を除く。2026-08-03 時点で 201 文字）。 */
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@600&display=swap&text=.01234ACEFHMOPQRSacdefghinopqrstux%E2%91%A0%E2%91%A1%E2%91%A2%E2%91%A3%E2%91%A4%E2%91%A5%E2%91%A6%E2%91%A7%E2%91%A8%E2%91%A9%E2%91%AA%E2%91%AB%E3%80%81%E3%80%82%E3%81%84%E3%81%86%E3%81%88%E3%81%8A%E3%81%8B%E3%81%8C%E3%81%8D%E3%81%8F%E3%81%93%E3%81%94%E3%81%95%E3%81%98%E3%81%99%E3%81%9A%E3%81%9B%E3%81%9D%E3%81%9F%E3%81%A0%E3%81%A1%E3%81%A4%E3%81%A6%E3%81%A7%E3%81%A8%E3%81%AB%E3%81%AE%E3%81%AF%E3%81%B8%E3%81%BE%E3%82%80%E3%82%81%E3%82%82%E3%82%84%E3%82%88%E3%82%89%E3%82%8A%E3%82%8B%E3%82%8C%E3%82%8D%E3%82%92%E3%82%B3%E3%82%B8%E3%82%B9%E3%83%81%E3%83%83%E3%83%88%E3%83%8A%E3%83%90%E3%83%91%E3%83%9A%E3%83%9F%E3%83%A3%E3%83%A9%E3%83%B3%E3%83%B6%E3%83%BB%E3%83%BC%E4%B8%80%E4%BA%BA%E4%BB%B6%E4%BC%9A%E4%BD%8D%E4%BE%9B%E4%BF%A1%E5%82%99%E5%83%8D%E5%85%A5%E5%86%86%E5%87%BA%E5%88%86%E5%89%8D%E5%8A%B4%E5%8B%95%E5%8B%9F%E5%8D%98%E5%8E%9F%E5%8F%96%E5%8F%A3%E5%90%88%E5%91%8A%E5%95%86%E5%95%8F%E5%9B%B2%E5%9C%8F%E5%A0%B1%E5%A0%B4%E5%A4%96%E5%AE%9A%E5%AE%9F%E5%AF%BE%E5%B8%82%E5%BD%93%E5%BD%A2%E5%BE%A1%E5%BF%9C%E6%83%85%E6%85%8B%E6%89%8B%E6%8B%A0%E6%8C%81%E6%8E%A1%E6%8F%90%E6%95%B0%E6%95%B4%E6%96%B9%E6%9B%B8%E6%9C%88%E6%9C%AC%E6%9D%A1%E6%9D%A5%E6%A1%88%E6%A4%9C%E6%A6%82%E6%AC%A1%E6%AF%8E%E6%AF%94%E6%B1%BA%E6%B5%81%E6%B8%AC%E6%BA%96%E7%82%B9%E7%89%B9%E7%94%A8%E7%99%BA%E7%9B%B8%E7%A4%BE%E7%A8%BF%E7%AB%B6%E7%AD%94%E7%AF%84%E7%B4%A2%E7%B5%A6%E7%B7%92%E7%BD%AE%E8%87%AA%E8%91%89%E8%A1%8C%E8%A6%81%E8%A6%8B%E8%A8%80%E8%A8%8E%E8%A8%AD%E8%AA%8D%E8%AD%98%E8%B1%A1%E8%B2%BB%E8%B3%AA%E8%BC%83%E9%9A%9B%E9%9C%80%E9%9C%B2%E9%A0%BC%E9%A1%98%EF%BC%8F');
 
 :root {
   /* 地 —— 純白をやめ、生成りにする */
@@ -38,21 +38,27 @@
   --surface: #FCFAF6;
   --surface2: #EFE9DE;
 
-  /* 文字 —— 黒ではなく墨 */
-  --ink: #1B1917;
-  --text: #1B1917;
-  --text-muted: #57514A;
-  --text-dim: #948C7E;
+  /* 文字 —— 黒ではなく墨。
+     ⚠ 2026-08-04: コントラストを測ったら --text-dim が 3.03、シアンが 2.66 で
+        WCAG AA（本文 4.5）を満たしていなかった。等幅の小ラベル・出所表記・四隅のメタ・
+        ナビが全部この色で、「ページが薄い」の直接の原因だった。実測して詰めた値に置換。 */
+  --ink: #14120F;
+  --text: #14120F;
+  --text-muted: #4A443C;   /* 対 bg 8.7 */
+  --text-dim: #6E665B;     /* 対 bg 5.6（旧 #948C7E は 3.03 で不足） */
 
   /* 罫 —— 影ではなく線で構造を作る */
-  --rule: rgba(27, 25, 23, 0.16);
-  --rule-soft: rgba(27, 25, 23, 0.08);
+  --rule: rgba(20, 18, 15, 0.24);
+  --rule-soft: rgba(20, 18, 15, 0.13);
   --border: var(--rule-soft);
   --border-light: var(--rule-soft);
 
-  /* アクセント（線と点だけ） */
+  /* アクセント。
+     ⚠ 線・点・図には robottte のシアン #00A0E8 をそのまま使う（面積が小さく色として認識させたい）。
+        **文字に使う場合は必ず --accent-text 側**を使う（#00A0E8 は地に対して 2.66 で読めない）。 */
   --accent: #00A0E8;
-  --accent-ink: #0A78AE;
+  --accent-ink: #06638F;   /* 対 bg 5.9。文字とアイコンに使う */
+  --accent-text: #06638F;
   --accent-dark: var(--accent-ink);
   --accent-light: #E9F3F7;
 
@@ -123,17 +129,44 @@ main > section { contain: paint; }
 /* ⚠ 塗らない。背面のアートを消さないため。奇数偶数の差は余白だけで付ける
    （旧: background: var(--bg2)） */
 .section--alt { background: transparent; }
+
+/* 墨地のセクション。
+   2026-08-04: 「ページが薄い／プロフェッショナルに見えない」への対応。
+   生成りの淡い面が最後まで続くと重心が無く、軽い印象になる。
+   締めのセクションだけ墨で伏せて、視覚的な錨を1つ置く。 */
+.section--ink {
+  background: var(--ink);
+  color: #EDE8DF;
+  /* 締めのセクションは余白を詰める（nth-of-type(odd) の 184px が乗ると空きすぎる） */
+  padding-top: 120px !important;
+  padding-bottom: 120px !important;
+}
+.section--ink .section-title,
+.section--ink .shead__en { color: #FBF8F2; }
+.section--ink .shead__idx { color: #8FC9E6; }
+.section--ink .shead__rule { background: #8FC9E6; }
+.section--ink .section-sub,
+.section--ink .section-lead { color: #C6BFB2; }
+.section--ink .card {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+.section--ink .note { color: #C6BFB2; border-left-color: #8FC9E6; }
+.section--ink .btn--primary { background: #FBF8F2; color: var(--ink); }
+.section--ink .btn--primary:hover { background: #fff; }
+.section--ink .btn--ghost { color: #FBF8F2; border-bottom-color: #8FC9E6; }
+.section--ink a { color: inherit; }
 .section--tight { padding: 104px 0; }
 .section--wide { padding: 200px 0; }
 
 /* 小ラベル —— 等幅・字間広め・短い罫。アクセント色はここに使う */
 .label {
   font-family: var(--font-mono);
-  font-size: 0.66rem;
-  font-weight: 500;
+  font-size: 0.68rem;
+  font-weight: 600;
   letter-spacing: 0.26em;
   text-transform: uppercase;
-  color: var(--text-dim);
+  color: var(--text-muted);
   margin-bottom: 28px;
   display: flex;
   align-items: center;
@@ -151,9 +184,10 @@ main > section { contain: paint; }
 .shead { display: flex; align-items: center; gap: 20px; margin-bottom: 22px; }
 .shead__idx {
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: 0.7rem;
+  font-weight: 600;
   letter-spacing: 0.18em;
-  color: var(--text-dim);
+  color: var(--accent-text);
 }
 .shead__rule { width: 56px; height: 1px; background: var(--accent); flex: none; }
 .shead__en {
@@ -193,8 +227,8 @@ main > section { contain: paint; }
 .card {
   /* 背面のアートを透かす。塗り切ると lab/05 の「地の上に文字が乗る」感じが消える。
      ⚠ backdrop-filter は使わない（カード数ぶん GPU 負荷が乗りスクロールが重くなる） */
-  background: rgba(252, 250, 246, 0.62);
-  border: 1px solid transparent;
+  background: rgba(253, 251, 248, 0.78);
+  border: 1px solid var(--rule-soft);
   border-radius: var(--radius);
   padding: 36px;
 }
