@@ -1,10 +1,11 @@
-// CTA は1本に絞る＝「採用ページの技術診断」（01_コンセプトとページ構成 §2-1 の注記）。
+// CTA は1本に絞る（01_コンセプトとページ構成 §2-1 の注記）。
+// ⚠ 「診断」という語は客先で使わない（手順①〜⑫.md:521 鉄則5）。「見て気づいたこと」「ご報告」と言う。
 // 送信先は support@robottte.com に決定（2026-08-03）。
 // robottte-site の Contact.jsx も外部フォームではなくメールリンク（kiban@robottte.com）で、方式は揃っている。
 const MAIL = 'support@robottte.com'
 
 export default function Contact() {
-  const subject = encodeURIComponent('採用ページの診断のお願い')
+  const subject = encodeURIComponent('採用ページについてのご相談')
   const body = encodeURIComponent(
     [
       '会社名：',
@@ -20,9 +21,9 @@ export default function Contact() {
     <section id="contact" className="section">
       <div className="container">
         <div className="card card--accent" style={{ padding: 'clamp(36px, 6vw, 72px)', textAlign: 'center' }}>
-          <p className="label" style={{ justifyContent: 'center' }}>お問い合わせ</p>
+          <p className="label" style={{ justifyContent: 'center' }}>Contact</p>
           <h2 className="section-title" style={{ maxWidth: '28ch', margin: '0 auto' }}>
-            まず、御社の採用ページを見せてください
+            まずは、採用ページを見せていただくところから
           </h2>
           <p style={{ marginTop: 24, color: 'var(--text-muted)', maxWidth: '56ch', margin: '24px auto 0' }}>
             URL をいただければ、求人が検索で認識される形になっているかを確認して、一枚にまとめてお返しします。

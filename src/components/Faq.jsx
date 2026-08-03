@@ -34,21 +34,30 @@ const ITEMS = [
 ]
 
 export default function Faq() {
-  const [open, setOpen] = useState(null)
+  // 先頭2問は開いた状態で出す。全部閉じていると「先にお答えしておきます」と言いながら
+  // 画面に答えが1つも見えない（2026-08-03 の指摘）。
+  const [open, setOpen] = useState(() => new Set([0, 1]))
 
   return (
     <section id="faq" className="section section--alt">
       <div className="container">
-        <p className="label">よくある質問</p>
-        <h2 className="section-title">先にお答えしておきます</h2>
+        <p className="label">FAQ</p>
+        <h2 className="section-title">ご検討の前に、よくいただくご質問</h2>
 
         <div style={{ marginTop: 40, display: 'grid', gap: 12 }}>
           {ITEMS.map((it, i) => {
-            const isOpen = open === i
+            const isOpen = open.has(i)
             return (
               <div key={it.q} className="card" style={{ padding: 0, overflow: 'hidden' }}>
                 <button
-                  onClick={() => setOpen(isOpen ? null : i)}
+                  onClick={() =>
+                  setOpen((prev) => {
+                    // 複数を同時に開けるようにする（1問開くと前の答えが閉じるのは読みにくい）
+                    const next = new Set(prev)
+                    next.has(i) ? next.delete(i) : next.add(i)
+                    return next
+                  })
+                }
                   aria-expanded={isOpen}
                   style={{
                     width: '100%', textAlign: 'left', background: 'none', border: 'none',

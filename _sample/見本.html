@@ -1,0 +1,393 @@
+<!-- 単体で開いたときの文字化け防止。claude.ai へ publish する場合は無害に無視される -->
+<meta charset="utf-8">
+<title>ご報告の見本（架空の例）</title>
+
+<style>
+:root{
+  --paper:#F6F6F3;
+  --card:#FFFFFF;
+  --ink:#1B1D21;
+  --ink-2:#4A4D55;
+  --ink-3:#7C808A;
+  --rule:#DEDEDA;
+  --indigo:#2B3F6B;
+  --indigo-soft:#E8ECF4;
+  --clay:#9A4A38;
+  --clay-soft:#F5E9E5;
+  --sage:#3F6F62;
+  --sage-soft:#E5EFEB;
+  --slide-w:1120px;
+  --mono:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  --jp:"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","Noto Sans JP","Meiryo",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#141518; --card:#1C1E23; --ink:#ECECE8; --ink-2:#B4B7BE; --ink-3:#868A93;
+    --rule:#2E3138; --indigo:#93AEE0; --indigo-soft:#22293A;
+    --clay:#D98E7B; --clay-soft:#332420; --sage:#7FB8A6; --sage-soft:#1D2A26;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#141518; --card:#1C1E23; --ink:#ECECE8; --ink-2:#B4B7BE; --ink-3:#868A93;
+  --rule:#2E3138; --indigo:#93AEE0; --indigo-soft:#22293A;
+  --clay:#D98E7B; --clay-soft:#332420; --sage:#7FB8A6; --sage-soft:#1D2A26;
+}
+:root[data-theme="light"]{
+  --paper:#F6F6F3; --card:#FFFFFF; --ink:#1B1D21; --ink-2:#4A4D55; --ink-3:#7C808A;
+  --rule:#DEDEDA; --indigo:#2B3F6B; --indigo-soft:#E8ECF4;
+  --clay:#9A4A38; --clay-soft:#F5E9E5; --sage:#3F6F62; --sage-soft:#E5EFEB;
+}
+
+*{box-sizing:border-box;}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:var(--jp); font-size:16px; line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--slide-w); margin:0 auto; padding:40px 20px 80px;}
+
+/* ---- deck header ---- */
+.deckhead{display:flex; flex-direction:column; gap:6px; margin:56px 0 20px;}
+.deckhead:first-of-type{margin-top:8px;}
+.deckhead .eyebrow{
+  font-family:var(--mono); font-size:11px; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--ink-3);
+}
+.deckhead h2{
+  margin:0; font-size:22px; font-weight:700; letter-spacing:.02em;
+}
+.deckhead .sub{font-size:13px; color:var(--ink-2);}
+
+/* ---- slide ---- */
+.slide{
+  position:relative; background:var(--card);
+  border:1px solid var(--rule); border-radius:3px;
+  aspect-ratio:297/210; width:100%;
+  padding:44px 52px 52px; margin-bottom:22px;
+  display:flex; flex-direction:column; gap:18px;
+  overflow:hidden;
+}
+.slide.center{justify-content:center; gap:22px;}
+.slide .num{
+  position:absolute; right:20px; bottom:14px;
+  font-family:var(--mono); font-size:10px; color:var(--ink-3); letter-spacing:.1em;
+}
+.slide h3{
+  margin:0; font-size:27px; font-weight:700; line-height:1.35;
+  letter-spacing:.01em; text-wrap:balance;
+}
+.slide h3 .q{color:var(--indigo);}
+.slide h3 .w{color:var(--clay);}
+.slide .lead{font-size:15px; color:var(--ink-2); max-width:64ch;}
+/* リード文（テーマ型見出しの直下に置く副題）の中の強調。見出しと同じ塗り分けにする。
+   2026-07-29: これが無いと .q/.w が地の文と同じ色で出て、数字の強調が消える。 */
+.slide .lead .q{color:var(--indigo); font-weight:700;}
+.slide .lead .w{color:var(--clay); font-weight:700;}
+.eyebrow-line{
+  font-family:var(--mono); font-size:11px; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--indigo); display:flex; gap:10px; align-items:center;
+}
+.eyebrow-line::after{content:""; flex:1; height:1px; background:var(--rule);}
+
+/* ---- cover ---- */
+.cover{background:var(--indigo); border-color:var(--indigo);}
+.cover, .cover h3, .cover .lead{color:#fff;}
+.cover .lead{color:#D3DCEE;}
+.cover .eyebrow-line{color:#A9BCDF;}
+.cover .eyebrow-line::after{background:rgba(255,255,255,.22);}
+.cover h3{font-size:34px;}
+.cover .goal{
+  margin-top:6px; padding:16px 20px; border-left:2px solid rgba(255,255,255,.4);
+  font-size:15px; color:#E6EBF6; max-width:60ch;
+}
+.cover .foot{
+  position:absolute; left:52px; bottom:34px;
+  font-family:var(--mono); font-size:11px; letter-spacing:.08em; color:#A9BCDF;
+}
+
+/* ---- data blocks ---- */
+.stat-row{display:flex; gap:14px; flex-wrap:wrap;}
+.stat{
+  flex:1 1 0; min-width:150px; background:var(--paper);
+  border:1px solid var(--rule); border-radius:2px; padding:14px 16px;
+  display:flex; flex-direction:column; gap:2px;
+}
+.stat .k{font-size:11px; color:var(--ink-3); letter-spacing:.04em;}
+.stat .v{
+  font-size:30px; font-weight:700; line-height:1.15;
+  font-variant-numeric:tabular-nums; letter-spacing:-.01em;
+}
+.stat .u{font-size:14px; font-weight:500; color:var(--ink-2);}
+.stat .n{font-size:11px; color:var(--ink-3);}
+.stat.good{border-left:3px solid var(--sage);} .stat.good .v{color:var(--sage);}
+.stat.warn{border-left:3px solid var(--clay);} .stat.warn .v{color:var(--clay);}
+.stat.key{border-left:3px solid var(--indigo);} .stat.key .v{color:var(--indigo);}
+
+table{
+  width:100%; border-collapse:collapse; font-size:13px;
+  font-variant-numeric:tabular-nums;
+}
+/* 2026-07-31 修正（対象は **ブラウザで .html を直接開いたとき** の表示）:
+   `overflow-x:auto` は overflow-y も auto に計算されるため .tablewrap は
+   「スクロールコンテナ」になり、flex アイテムの自動最小サイズが 0 になる。
+   .slide は高さ固定（aspect-ratio）の column flex + overflow:hidden なので、
+   スライドの中身がはみ出すと **潰せるのは .tablewrap だけ** → 表が高さ2px
+   （枠線のみ）に潰れ、表が丸ごと見えなくなる。
+   実測: コウダイ資料③1枚版を Chromium で直接開くと .tablewrap=2px / table=131px。
+   ⚠ PDF 経路（deck_pdf.js）では再現しない。あちらは中身を .fit-inner で包んでから
+     zoom を当てるため .tablewrap が flex アイテムでなくなり、表は正常に出力される
+     （2026-07-31 に修正前後のPDFを実際にラスタライズして確認済み）。
+     したがって既出のPDFに欠落は無い。直しているのは HTML を人に見せる経路。
+   はみ出しは deck_pdf.js の zoom（R2 の正規の手段）で吸収させる。 */
+.tablewrap{overflow-x:auto; flex:0 0 auto; border:1px solid var(--rule); border-radius:2px;}
+th,td{padding:7px 12px; text-align:left; border-bottom:1px solid var(--rule); white-space:nowrap;}
+th{
+  font-family:var(--mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--ink-3); font-weight:500; background:var(--paper);
+}
+tbody tr:last-child td{border-bottom:none;}
+td.num{text-align:right;}
+/* 2026-07-29 修正: ページ番号の .slide .num（絶対配置・詳細度0,0,2,0）が
+   表の数値セル td.num（0,0,1,1）に勝ってしまい、数値セルが右下に重なって
+   消えていた。表側を明示的に勝たせる。原本のアーティファクトも同じ状態。 */
+.slide td.num{position:static; text-align:right;}
+tr.self{background:var(--clay-soft);}
+tr.self td{font-weight:700; color:var(--clay);}
+tr.self.ok{background:var(--sage-soft);}
+tr.self.ok td{color:var(--sage);}
+.gap{color:var(--clay); font-weight:600;}
+
+.note{
+  font-size:12px; color:var(--ink-3); line-height:1.6;
+  border-left:2px solid var(--rule); padding-left:12px;
+}
+.note b{color:var(--ink-2);}
+
+.cols{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+.panel{
+  background:var(--paper); border:1px solid var(--rule);
+  border-radius:2px; padding:16px 18px; display:flex; flex-direction:column; gap:8px;
+}
+.panel h4{
+  margin:0; font-size:12px; letter-spacing:.1em; font-family:var(--mono);
+  text-transform:uppercase; color:var(--ink-3); font-weight:500;
+}
+.panel.good{background:var(--sage-soft); border-color:transparent;}
+.panel.good h4{color:var(--sage);}
+.panel.warn{background:var(--clay-soft); border-color:transparent;}
+.panel.warn h4{color:var(--clay);}
+.panel ul{margin:0; padding-left:18px; font-size:13.5px; line-height:1.75; color:var(--ink-2);}
+.panel ul strong{color:var(--ink);}
+
+.steps{display:flex; flex-direction:column; gap:9px;}
+.step{
+  display:grid; grid-template-columns:36px 1fr auto; gap:14px; align-items:center;
+  background:var(--paper); border:1px solid var(--rule); border-radius:2px; padding:11px 14px;
+}
+.step .idx{
+  font-family:var(--mono); font-size:16px; font-weight:600; color:var(--ink-3);
+  text-align:center;
+}
+.step .body strong{display:block; font-size:14.5px;}
+.step .body span{font-size:12px; color:var(--ink-3);}
+.step .tag{
+  font-family:var(--mono); font-size:10px; letter-spacing:.08em; padding:3px 8px;
+  border-radius:2px; background:var(--rule); color:var(--ink-2); white-space:nowrap;
+}
+.step.p1{border-left:3px solid var(--clay);} .step.p1 .idx{color:var(--clay);}
+.step.p1 .tag{background:var(--clay); color:#fff;}
+.step.p2{border-left:3px solid var(--indigo);} .step.p2 .idx{color:var(--indigo);}
+.step.p2 .tag{background:var(--indigo); color:#fff;}
+.step.p3{border-left:3px solid var(--rule);}
+
+.pending{
+  background:var(--paper); border:1px dashed var(--rule); border-radius:2px;
+  padding:14px 18px; font-size:12.5px; color:var(--ink-2); line-height:1.8;
+}
+.pending b{color:var(--ink); font-size:11px; font-family:var(--mono); letter-spacing:.1em; display:block; margin-bottom:4px; text-transform:uppercase;}
+
+.bar{display:flex; flex-direction:column; gap:7px; margin-top:2px;}
+.bar .row{display:grid; grid-template-columns:170px 1fr 92px; gap:12px; align-items:center; font-size:12.5px;}
+.bar .lbl{color:var(--ink-2); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+.bar .track{height:16px; background:var(--paper); border:1px solid var(--rule); border-radius:1px; position:relative;}
+.bar .fill{position:absolute; inset:0 auto 0 0; background:var(--indigo-soft); border-right:2px solid var(--indigo);}
+.bar .amt{text-align:right; font-variant-numeric:tabular-nums; color:var(--ink-2); font-size:12.5px;}
+.bar .row.self .lbl{font-weight:700; color:var(--clay);}
+.bar .row.self .fill{background:var(--clay-soft); border-right-color:var(--clay);}
+.bar .row.self .amt{color:var(--clay); font-weight:700;}
+
+.footnote{font-size:11.5px; color:var(--ink-3); line-height:1.6;}
+.footnote a{color:inherit;}
+
+/* ---- 作り方（労働量の可視化） ---- */
+.method{display:grid; grid-template-columns:repeat(4,1fr); gap:12px;}
+.method .m{
+  background:var(--paper); border:1px solid var(--rule); border-radius:2px;
+  padding:14px 16px; display:flex; flex-direction:column; gap:3px;
+}
+.method .m .v{
+  font-size:27px; font-weight:700; line-height:1.15; color:var(--indigo);
+  font-variant-numeric:tabular-nums;
+}
+.method .m .v .u{font-size:13px; font-weight:500; color:var(--ink-2);}
+.method .m .act{font-size:12.5px; color:var(--ink); font-weight:600;}
+.method .m .src{font-size:11px; color:var(--ink-3); line-height:1.5;}
+
+/* ---- 空欄ワークシート（印刷して手書きする前提。input ではない） ---- */
+.sheet{
+  background:var(--paper); border:1px solid var(--rule); border-radius:2px;
+  padding:20px 24px; display:flex; flex-direction:column; gap:12px;
+}
+.sheet .r{
+  display:grid; grid-template-columns:1fr auto; gap:16px; align-items:baseline;
+  font-size:14.5px; color:var(--ink-2);
+}
+/* 2026-07-29 修正: nowrap+ellipsis だと「1名採用するのにかかっている費用（媒体費・
+   紹介手数料）」のような実際のラベルが無言で「…」に切り落とされる。
+   客先で読めない行が出るので折り返しを許す（原本アーティファクトも折り返し）。 */
+.sheet .r .lb{line-height:1.5;}
+/* 小計行（差し引き＝採れていない人数）。合計行より軽い区切り。 */
+.sheet .r.sub{border-top:1px solid var(--rule); padding-top:12px;}
+.sheet .r.sub .lb{font-weight:700; color:var(--ink);}
+/* 2026-07-29 修正: 演算子つきの行は3要素になるため、2カラムのままだと
+   3つ目（記入欄）が次の行へ折り返して崩れる。専用の3カラムを与える。
+   原本のアーティファクトは負のmarginで寄せていたが、折り返しは直っていない。 */
+.sheet .r.calc{grid-template-columns:auto 1fr auto;}
+.sheet .r .fill-in{
+  display:inline-block; min-width:110px; border-bottom:1.5px solid var(--ink-3);
+  height:1.3em;
+}
+.sheet .r.total{
+  border-top:1px solid var(--rule); padding-top:14px; margin-top:2px;
+  font-size:17px; font-weight:700; color:var(--ink);
+}
+.sheet .r.total .fill-in{min-width:180px; border-bottom-color:var(--clay); border-bottom-width:2px;}
+.sheet .op{font-family:var(--mono); font-size:12px; color:var(--ink-3); letter-spacing:.08em;}
+
+/* ---- ロードマップ（半年〜1年の時間軸） ---- */
+.road{display:grid; grid-template-columns:repeat(4,1fr); gap:14px;}
+.road .r{
+  background:var(--card); border:1px solid var(--rule); border-radius:2px;
+  border-top:3px solid var(--indigo); padding:15px 16px;
+  display:flex; flex-direction:column; gap:8px;
+}
+/* later = 前段の結果を見てから着手する期。線を弱めて「確約ではない」を見た目に出す */
+.road .r.later{border-top-color:var(--rule);}
+.road .r .t{font-family:var(--mono); font-size:11px; letter-spacing:.1em; color:var(--indigo); font-weight:600;}
+.road .r.later .t{color:var(--ink-3);}
+.road .r ul{margin:0; padding-left:17px; font-size:13px; line-height:1.75; color:var(--ink-2);}
+.road .r ul strong{color:var(--ink);}
+
+/* ---- 出所一覧（資料ごとの独立ページ用） ---- */
+.srclist{display:flex; flex-direction:column; gap:11px;}
+.srclist .s{
+  display:grid; grid-template-columns:34px 1fr; gap:14px;
+  background:var(--card); border:1px solid var(--rule); border-radius:2px; padding:13px 16px;
+  font-size:13px; color:var(--ink-2); line-height:1.7;
+}
+.srclist .s .n{font-family:var(--mono); font-size:12px; color:var(--indigo); font-weight:700;}
+.srclist .s strong{color:var(--ink);}
+.srclist .s .u{font-family:var(--mono); font-size:11px; color:var(--ink-3); word-break:break-all;}
+
+/* ---- 決裁者にしか決められない判断 ---- */
+.decide{display:grid; grid-template-columns:repeat(3,1fr); gap:14px;}
+.decide .d{
+  background:var(--clay-soft); border-radius:2px; padding:18px 18px 16px;
+  display:flex; flex-direction:column; gap:8px;
+}
+.decide .d .tag{
+  font-family:var(--mono); font-size:10px; letter-spacing:.1em; color:var(--clay);
+  text-transform:uppercase;
+}
+.decide .d strong{font-size:16px; line-height:1.4; color:var(--ink);}
+.decide .d p{margin:0; font-size:12.5px; color:var(--ink-2); line-height:1.65;}
+.decide .d .ev{
+  margin-top:auto; padding-top:8px; font-size:11.5px; color:var(--clay);
+  font-weight:600; border-top:1px solid rgba(154,74,56,.22);
+}
+
+/* ---- 締めの依頼（クロージング） ---- */
+.ask{
+  background:var(--indigo); color:#fff; border-radius:2px;
+  padding:24px 28px; display:flex; flex-direction:column; gap:10px;
+}
+.ask .k{
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.14em;
+  text-transform:uppercase; color:#A9BCDF;
+}
+.ask strong{font-size:21px; line-height:1.45; font-weight:700;}
+.ask p{margin:0; font-size:13.5px; color:#D3DCEE; line-height:1.7;}
+.ask .row{display:flex; gap:26px; flex-wrap:wrap; margin-top:4px;}
+.ask .row div{display:flex; flex-direction:column; gap:1px;}
+.ask .row .kk{font-size:10.5px; color:#A9BCDF; font-family:var(--mono); letter-spacing:.08em;}
+.ask .row .vv{font-size:14.5px; font-weight:600;}
+
+/* ---- 月次で追うもの ---- */
+.watch{display:grid; grid-template-columns:repeat(2,1fr); gap:10px 16px;}
+.watch .w{
+  display:grid; grid-template-columns:auto 1fr; gap:10px; align-items:baseline;
+  font-size:13px; color:var(--ink-2); padding:9px 12px;
+  background:var(--paper); border:1px solid var(--rule); border-radius:2px;
+}
+.watch .w .mk{
+  font-family:var(--mono); font-size:10px; color:var(--indigo); letter-spacing:.08em;
+  white-space:nowrap;
+}
+.watch .w strong{color:var(--ink); font-weight:600;}
+
+@media (max-width:900px){
+  .slide{aspect-ratio:auto; padding:28px 24px 40px;}
+  .slide h3{font-size:22px;} .cover h3{font-size:26px;}
+  .cols{grid-template-columns:1fr;}
+  .bar .row{grid-template-columns:110px 1fr 78px;}
+  .cover .foot{left:24px;}
+  .method{grid-template-columns:repeat(2,1fr);}
+  .decide{grid-template-columns:1fr;}
+  .watch{grid-template-columns:1fr;}
+  .ask strong{font-size:18px;}
+}
+@media print{
+  body{background:#fff;}
+  .wrap{max-width:none; padding:0;}
+  .deckhead{display:none;}
+  .slide{page-break-after:always; border:none; border-radius:0; margin:0; height:100vh;}
+  @page{size:A4 landscape; margin:0;}
+}
+@media (prefers-reduced-motion:no-preference){
+  .slide{transition:none;}
+}
+</style>
+
+<div class="wrap">
+<div class="deckhead">
+  <div class="eyebrow">見本</div>
+  <h2>ご報告の見本</h2>
+  <div class="sub">架空の会社を想定した例です。実在の企業・実測値は含みません</div>
+</div>
+
+<section class="slide cover center">
+  <div class="eyebrow-line">HR パートナー ご報告（見本）</div>
+  <h3>採用競合と現在地</h3>
+  <div class="goal">これは<strong>架空の会社を想定した見本</strong>です。実際にはご商談の前に、御社の求人と競合の求人を実際に開いて確かめたものをお持ちします。</div>
+  <div class="foot">架空の例 ／ 実在の企業・実測値は含みません</div>
+</section>
+
+<section class="slide">
+  <div class="eyebrow-line">調べ方</div>
+  <h3>調査の範囲と方法</h3>
+  <div class="lead">何を見て、どこから取ったかを<span class="q">1枚目に必ず書きます</span>。数字だけを渡さず、<span class="w">その数字がどこから来たか</span>を添えます。</div>
+  <div class="method"><div class="m"><span class="v">5<span class="u">社</span></span><span class="act">同じ求職者を取り合っている同業を、求職者が見る検索画面から特定</span><span class="src">求人媒体の検索結果（架空の例）</span></div><div class="m"><span class="v">20<span class="u">件</span></span><span class="act">求人票を個別に開き、給与・休日・手当・保証を同じ表に転記</span><span class="src">求人媒体／各社の採用ページ（架空の例）</span></div><div class="m"><span class="v">3<span class="u">通り</span></span><span class="act">職種×地域で検索し、御社が何番目に出るかを実測</span><span class="src">検索語3種（架空の例）</span></div><div class="m"><span class="v">2<span class="u">本</span></span><span class="act">制度・単価の根拠を、所管省庁の通知そのもので確認</span><span class="src">官公庁の公開資料（架空の例）</span></div></div>
+  <div class="note">取れなかった項目は<b>「未取得」と書きます</b>。埋めません。順位や検索ボリュームは、<b>いつ・どこから調べたか</b>で変わるため、取得日・地域を必ず添えます。</div>
+  <div class="num">01 / 02</div>
+</section>
+
+<section class="slide">
+  <div class="eyebrow-line">気づき ／ 条件の並び</div>
+  <h3>同じ物差しで並べる</h3>
+  <div class="lead">条件は<span class="q">同じ表に並べて初めて</span>比べられます。バラバラの表記を、同じ単位に直してから置きます。</div>
+  <div class="tablewrap"><table><thead><tr><th>会社</th><th>月給の下限</th><th>休日</th><th>資格手当</th></tr></thead><tbody><tr class="self"><td><b>御社（架空）</b></td><td><b>21.0 万円</b></td><td><b>週休2日</b></td><td><b>あり</b></td></tr><tr><td>A社</td><td>22.5 万円</td><td>週休2日</td><td>あり</td></tr><tr><td>B社</td><td>23.0 万円</td><td>シフト制</td><td>あり</td></tr><tr class="warn"><td>C社</td><td>24.0 万円</td><td>完全週休2日</td><td>あり（上限なし）</td></tr><tr><td>D社</td><td>21.5 万円</td><td>シフト制</td><td>記載なし</td></tr></tbody></table></div>
+  <div class="note">この表は<b>架空の数値</b>です。実際のご報告では、各社の求人票を開いた日付と媒体名を各行に添えます。<br>条件で負けている項目が見つかった場合、<b>それは経営判断の材料</b>としてお渡しします。条件を動かすかどうかは御社が決めることです。</div>
+  <div class="footnote">※ 架空の例です。効果をお約束するものではありません。実際の調査では、取得日・媒体名・検索条件を各数値に添えます。</div>
+  <div class="num">02 / 02</div>
+</section>
+</div>

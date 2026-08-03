@@ -2,7 +2,7 @@
 const STEPS = [
   {
     when: '初回',
-    what: '採用ページの技術診断',
+    what: '採用ページを見て、気づいたことのご報告',
     detail: '求人が検索で認識される形になっているかを、実際のページで確認してご報告します。',
   },
   {
@@ -26,8 +26,9 @@ export default function Flow() {
   return (
     <section id="flow" className="section section--alt">
       <div className="container">
-        <p className="label">進め方</p>
-        <h2 className="section-title">診断から、毎月の手入れまで</h2>
+        <p className="label">Process</p>
+        <h2 className="section-title">はじめのご報告から、月次の手入れまで</h2>
+        <p className="section-sub">初回のご報告から、ご契約後の運用までの流れです。</p>
 
         <ol style={{ display: 'grid', gap: 20, marginTop: 44, listStyle: 'none' }}>
           {STEPS.map((s, i) => (

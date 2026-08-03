@@ -13,8 +13,9 @@ export default function Chat() {
   return (
     <section id="chat" className="section">
       <div className="container">
-        <p className="label">併せて</p>
-        <h2 className="section-title">サイトに来た方を、取りこぼさない</h2>
+        <p className="label">Chat</p>
+        <h2 className="section-title">採用ページに来た方への、その場の応答</h2>
+        <p className="section-sub">タグ1行から始められます。ご準備が整うまで表示されません。</p>
         <p className="section-lead">
           採用ページに1行のタグを入れると、来た方の疑問にその場で答えるようになります（HRチャット）。
           管理画面でオンにするまで表示されないので、準備が終わってから公開できます。

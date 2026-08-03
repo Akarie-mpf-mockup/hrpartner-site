@@ -39,8 +39,9 @@ export default function Partner() {
   return (
     <section id="partner" className="section">
       <div className="container">
-        <p className="label">できること</p>
-        <h2 className="section-title">手を動かすところと、お願いすること</h2>
+        <p className="label">Scope</p>
+        <h2 className="section-title">当方が持つ範囲と、御社にお願いする範囲</h2>
+        <p className="section-sub">助言をお伝えするだけでも、システムをお渡しするだけでもありません。</p>
         <p className="section-lead">
           システムをお渡しするだけでも、助言をお伝えするだけでもなく、求人原稿の書き換え・競合条件の比較・
           数字の整理まで当方が手を動かします。御社に残るのは、素材のご提供と条件に関する経営判断です。

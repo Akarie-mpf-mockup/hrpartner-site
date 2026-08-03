@@ -1,128 +1,314 @@
-/* トークンは robottte-site/src/index.css を踏襲（同じブランドとして揃えるため） */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=M+PLUS+1p:wght@300;400;500;700;800&display=swap');
+/* ─────────────────────────────────────────────────────────────────────────
+   HRパートナー サービスサイト — 配色・タイポグラフィ
+
+   方向性（2026-08-03 変更）:
+     当初は robottte-site のトークンをそのまま踏襲していたが、
+     「SaaS っぽくて いまいち」という評価だったため、編集物（誌面）寄りに変えた。
+     参考: off-notes-yuki.web.app/lab/03,04,05（生成りの地・明朝の大見出し・
+     等幅の小ラベル・極端な余白・アクセントは1色だけ）
+
+   ★日本語の明朝だけ Web フォントを読む（1ウェイトのみ）。
+     当初は「OS 標準の明朝で 0KB」にしたが、**実測すると Linux/Android に明朝が無く
+     ゴシックにフォールバックした**（見出しが明朝で出ない＝デザインの前提が崩れる）。
+     Google Fonts は unicode-range で分割配信するため、1ウェイトなら転送は限定的。
+     本文ゴシックと等幅は OS 標準のまま（0KB）。
+     変更前は M PLUS 1p を5ウェイト読んでおり **フォントだけで 807KB**（実測）あった。
+     ウェイトを増やすとここへ逆戻りする。**明朝は 600 の1本だけに保つこと。**
+
+   ★robottte のシアン（#00A0E8）は「線・点・小さな記号」だけに使う。
+     面（塗りボタン・塗りセル）には使わない。静かな地色と同居させるため。
+
+   旧トークン名（--border, --font-sans, --shadow 等）は**別名として残す**。
+   9つのコンポーネントが参照しているため、消すと全部書き換えになる。
+   ───────────────────────────────────────────────────────────────────────── */
+
+/* ★使う文字だけを配信する（text= 指定）。全文字だと 401KB、これで大幅に減る。
+   ⚠ 明朝で表示する文言を変えたら、この一覧を作り直すこと。
+      新しい文字はフォントに含まれず、**無言でゴシックにフォールバック**する。
+      作り直し方: ページを開いて、明朝で描画されている文字を集める
+      検査コマンド: node scripts/check-font-subset.mjs <preview URL>（不足があれば exit 2）。
+      （ページを Playwright で開き、computedStyle の fontFamily が Shippori を含む
+      テキストノードの文字を集めて重複を除く。2026-08-03 時点で 173 文字）。 */
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@600&display=swap&text=01234EHMOR%E2%91%A0%E2%91%A1%E2%91%A2%E2%91%A3%E2%91%A4%E2%91%A5%E2%91%A6%E2%91%A7%E2%91%A8%E2%91%A9%E2%91%AA%E2%91%AB%E3%80%81%E3%80%82%E3%81%84%E3%81%86%E3%81%88%E3%81%8A%E3%81%8B%E3%81%8C%E3%81%8D%E3%81%8F%E3%81%93%E3%81%94%E3%81%95%E3%81%98%E3%81%99%E3%81%9A%E3%81%9B%E3%81%9D%E3%81%9F%E3%81%A0%E3%81%A1%E3%81%A4%E3%81%A6%E3%81%A7%E3%81%A8%E3%81%AB%E3%81%AE%E3%81%AF%E3%81%B8%E3%81%BE%E3%82%80%E3%82%81%E3%82%82%E3%82%84%E3%82%88%E3%82%89%E3%82%8A%E3%82%8B%E3%82%8C%E3%82%8D%E3%82%92%E3%82%B3%E3%82%B8%E3%82%B9%E3%83%88%E3%83%8A%E3%83%90%E3%83%91%E3%83%9A%E3%83%9F%E3%83%A9%E3%83%B3%E3%83%B6%E3%83%BB%E3%83%BC%E4%B8%80%E4%BA%BA%E4%BB%B6%E4%BC%9A%E4%BD%8D%E4%BE%9B%E4%BF%A1%E5%82%99%E5%83%8D%E5%85%A5%E5%86%86%E5%87%BA%E5%88%86%E5%89%8D%E5%8A%B4%E5%8B%95%E5%8B%9F%E5%8D%98%E5%8E%9F%E5%8F%96%E5%8F%A3%E5%90%88%E5%91%8A%E5%95%86%E5%95%8F%E5%9B%B2%E5%9C%8F%E5%A0%B1%E5%A0%B4%E5%A4%96%E5%AE%9A%E5%AE%9F%E5%AF%BE%E5%B8%82%E5%BD%93%E5%BD%A2%E5%BE%A1%E5%BF%9C%E6%83%85%E6%85%8B%E6%89%8B%E6%8B%A0%E6%8C%81%E6%8E%A1%E6%8F%90%E6%95%B0%E6%95%B4%E6%96%B9%E6%9B%B8%E6%9C%88%E6%9C%AC%E6%9D%A1%E6%9D%A5%E6%A1%88%E6%A4%9C%E6%A6%82%E6%AC%A1%E6%AF%8E%E6%AF%94%E6%B1%BA%E6%B5%81%E6%B8%AC%E6%BA%96%E7%82%B9%E7%89%B9%E7%94%A8%E7%99%BA%E7%9B%B8%E7%A4%BE%E7%A8%BF%E7%AB%B6%E7%AD%94%E7%AF%84%E7%B4%A2%E7%B5%A6%E7%B7%92%E7%BD%AE%E8%87%AA%E8%91%89%E8%A1%8C%E8%A6%81%E8%A6%8B%E8%A8%80%E8%A8%8E%E8%A8%AD%E8%AA%8D%E8%AD%98%E8%B1%A1%E8%B2%BB%E8%B3%AA%E8%BC%83%E9%9A%9B%E9%9C%80%E9%9C%B2%E9%A0%BC%E9%A1%98');
 
 :root {
-  --bg: #FFFFFF;
-  --bg2: #F4F8FB;
-  --surface: #FFFFFF;
-  --surface2: #EBF5FA;
-  --border: rgba(0, 160, 232, 0.15);
-  --border-light: rgba(0, 0, 0, 0.08);
-  --text: #0F1923;
-  --text-muted: #4A5568;
-  --text-dim: #8896A4;
+  /* 地 —— 純白をやめ、生成りにする */
+  --bg: #F7F4EE;
+  --bg2: #F1ECE3;
+  --surface: #FCFAF6;
+  --surface2: #EFE9DE;
+
+  /* 文字 —— 黒ではなく墨 */
+  --ink: #1B1917;
+  --text: #1B1917;
+  --text-muted: #57514A;
+  --text-dim: #948C7E;
+
+  /* 罫 —— 影ではなく線で構造を作る */
+  --rule: rgba(27, 25, 23, 0.16);
+  --rule-soft: rgba(27, 25, 23, 0.08);
+  --border: var(--rule-soft);
+  --border-light: var(--rule-soft);
+
+  /* アクセント（線と点だけ） */
   --accent: #00A0E8;
-  --accent-dark: #0080C0;
-  --accent-light: #E6F5FC;
-  --warn: #B45309;
-  --warn-light: #FFF7ED;
-  --font-sans: 'Inter', 'M PLUS 1p', sans-serif;
-  --font-body: 'M PLUS 1p', 'Inter', sans-serif;
-  --nav-h: 72px;
-  --max-w: 1120px;
-  --radius: 12px;
-  --shadow: 0 4px 24px rgba(0, 160, 232, 0.10);
-  --shadow-md: 0 12px 48px rgba(0, 160, 232, 0.18);
+  --accent-ink: #0A78AE;
+  --accent-dark: var(--accent-ink);
+  --accent-light: #E9F3F7;
+
+  --warn: #8A5A20;
+  --warn-light: #F6F0E4;
+
+  /* 書体 —— すべて OS 標準。--font-sans を明朝に向けることで、
+     既存コンポーネントの .section-title が自動的に明朝になる */
+  --font-display: 'Shippori Mincho B1', 'Hiragino Mincho ProN', 'Yu Mincho', YuMincho, 'MS PMincho', serif;
+  --font-body: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', YuGothic, Meiryo, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+  --font-sans: var(--font-display);
+
+  --nav-h: 76px;
+  --max-w: 1080px;
+  --radius: 2px;
+
+  /* 影はほぼ使わない（誌面に影は出ない） */
+  --shadow: none;
+  --shadow-md: 0 1px 0 var(--rule);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; font-size: 17px; scroll-padding-top: var(--nav-h); }
+
+html {
+  scroll-behavior: smooth;
+  font-size: 17px;
+  scroll-padding-top: var(--nav-h);
+}
+
 body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-body);
-  line-height: 1.8;
+  line-height: 1.95;
+  font-feature-settings: 'palt' 1;      /* 日本語の詰め。誌面っぽさに効く */
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  /* 紙の粒子。インライン SVG なので実質 0KB */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");
 }
+
 a { color: inherit; text-decoration: none; }
 ul { list-style: none; }
 
-.container { max-width: var(--max-w); margin: 0 auto; padding: 0 40px; }
-.section { padding: 104px 0; }
-.section--alt { background: var(--bg2); }
+.container { max-width: var(--max-w); margin: 0 auto; padding: 0 48px; }
 
+/* 余白を大きく。緩急のため --tight / --wide を用意する */
+.section { padding: 152px 0; position: relative; }
+.section--alt { background: var(--bg2); }
+.section--tight { padding: 104px 0; }
+.section--wide { padding: 200px 0; }
+
+/* 小ラベル —— 等幅・字間広め・短い罫。アクセント色はここに使う */
 .label {
-  font-family: var(--font-sans);
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.26em;
   text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 14px;
+  color: var(--text-dim);
+  margin-bottom: 28px;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 14px;
 }
 .label::before {
   content: '';
-  width: 20px; height: 2px;
+  width: 32px;
+  height: 1px;
   background: var(--accent);
-  border-radius: 1px;
 }
 
+/* 大見出し —— 明朝・細め・大きく。太さ800 をやめる */
 .section-title {
-  font-family: var(--font-sans);
-  font-size: clamp(1.9rem, 3.4vw, 2.7rem);
-  font-weight: 800;
-  line-height: 1.35;
-  letter-spacing: -0.01em;
+  font-family: var(--font-display);
+  font-size: clamp(1.85rem, 3.6vw, 2.9rem);
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+}
+ /* 副題 —— 見出し（名詞句）の示唆を担う。01_コンセプトとページ構成:97 の型 */
+.section-sub {
+  margin-top: 22px;
+  max-width: 44ch;
+  color: var(--text-muted);
+  font-size: 1.0rem;
+  line-height: 2.0;
 }
 .section-lead {
-  margin-top: 20px;
-  max-width: 60ch;
+  margin-top: 28px;
+  max-width: 46ch;
   color: var(--text-muted);
-  font-size: 1.02rem;
+  font-size: 0.98rem;
+  line-height: 2.0;
 }
 
+/* カード —— 影と角丸をやめ、細い罫だけにする */
 .card {
   background: var(--surface);
-  border: 1px solid var(--border-light);
+  border: 1px solid var(--rule-soft);
   border-radius: var(--radius);
-  padding: 32px;
+  padding: 36px;
 }
-.card--accent { border-color: var(--border); box-shadow: var(--shadow); }
+.card--accent { border-color: var(--rule); }
 
-.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 40px; }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 56px; }
 
+/* ボタン —— 角丸ピルをやめる。主は墨のベタ、従は下線のみ */
 .btn {
   display: inline-block;
   font-family: var(--font-body);
-  font-weight: 700;
-  font-size: 0.98rem;
-  padding: 15px 32px;
-  border-radius: 999px;
+  font-weight: 500;
+  font-size: 0.92rem;
+  letter-spacing: 0.04em;
+  padding: 17px 38px;
+  border-radius: var(--radius);
   border: 1px solid transparent;
-  transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+  transition: background .2s ease, color .2s ease, border-color .2s ease;
   cursor: pointer;
 }
-.btn--primary { background: var(--accent); color: #fff; box-shadow: var(--shadow); }
-.btn--primary:hover { background: var(--accent-dark); transform: translateY(-2px); box-shadow: var(--shadow-md); }
-.btn--ghost { border-color: var(--border); color: var(--accent-dark); background: #fff; }
-.btn--ghost:hover { background: var(--accent-light); }
-
-.tablewrap { margin-top: 40px; overflow-x: auto; }
-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
-th, td { text-align: left; padding: 16px 18px; border-bottom: 1px solid var(--border-light); vertical-align: top; }
-th { font-weight: 700; color: var(--text-muted); font-size: 0.84rem; letter-spacing: .04em; background: var(--bg2); }
-tr.self td { background: var(--accent-light); font-weight: 700; }
-
-.note {
-  margin-top: 28px;
-  padding: 20px 24px;
-  background: var(--bg2);
-  border-left: 3px solid var(--accent);
-  border-radius: 0 8px 8px 0;
-  color: var(--text-muted);
-  font-size: 0.94rem;
+.btn--primary { background: var(--ink); color: #FCFAF6; }
+.btn--primary:hover { background: #322E29; }
+.btn--ghost {
+  border-color: transparent;
+  color: var(--ink);
+  background: transparent;
+  padding: 17px 0;
+  border-bottom: 1px solid var(--accent);
+  border-radius: 0;
 }
+.btn--ghost:hover { color: var(--accent-ink); }
+
+/* 表 —— 縦罫なし・横罫だけ。自社行は塗らず、左に細い印を置く */
+.tablewrap { margin-top: 56px; overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+th, td { text-align: left; padding: 20px 20px; border-bottom: 1px solid var(--rule-soft); vertical-align: top; }
+th {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  color: var(--text-dim);
+  font-size: 0.68rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  background: transparent;
+  border-bottom-color: var(--rule);
+}
+/* ⚠ 印は1列目だけ。td 全部に付けると列ごとに縦線が出る（実測で4本出た） */
+tr.self td { background: transparent; font-weight: 500; }
+tr.self td:first-child { box-shadow: inset 2px 0 0 var(--accent); }
+
+/* 補足 —— 塗りをやめ、左の細罫だけ */
+.note {
+  margin-top: 36px;
+  padding: 4px 0 4px 24px;
+  background: transparent;
+  border-left: 1px solid var(--accent);
+  border-radius: 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 2.0;
+}
+
+/* 読み進みを示す細い線。参考サイトにもある表現で、これだけで「生きている」感じが出る */
+.progress {
+  position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 60;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  will-change: transform;
+  pointer-events: none;
+}
+
+/* Hero の見出しを行ごとに下から出す。行の外へはみ出す分を隠して「立ち上がる」ように見せる */
+.hero-mask { display: block; overflow: hidden; }
+.hero-mask > span {
+  display: block;
+  transform: translateY(105%);
+  animation: riseIn 1.05s cubic-bezier(.22,.61,.36,1) forwards;
+}
+.hero-mask:nth-of-type(1) > span { animation-delay: .12s; }
+.hero-mask:nth-of-type(2) > span { animation-delay: .26s; }
+@keyframes riseIn { to { transform: translateY(0); } }
+
+/* ラベルの短い罫を、表示に合わせて左から引く */
+.label::before { width: 0; transition: width .8s cubic-bezier(.22,.61,.36,1) .15s; }
+.reveal.is-in .label::before, .is-in > .label::before, .label.is-in::before { width: 32px; }
+/* Hero など reveal の内側にある場合も引けるように */
+.is-in .label::before { width: 32px; }
+
+/* 図版に奥行きを与える（--par は useParallax が書く） */
+.hero-figure { transform: translateY(calc(-40% + var(--par, 0px))); }
+
+/* カードは触ると気配が出る程度に */
+.card { transition: border-color .3s ease, transform .3s ease; }
+.card:hover { border-color: var(--rule); transform: translateY(-2px); }
+
+/* 表の行も触れると分かる */
+tbody tr { transition: background .25s ease; }
+tbody tr:hover td { background: rgba(27,25,23,.025); }
+
+/* ナビの現在地 */
+.nav-links a { position: relative; padding-bottom: 3px; }
+.nav-links a::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 1px;
+  background: var(--accent); transform: scaleX(0); transform-origin: 0 50%;
+  transition: transform .3s cubic-bezier(.22,.61,.36,1);
+}
+.nav-links a:hover::after, .nav-links a[data-active='1']::after { transform: scaleX(1); }
+
+/* スクロール表示（framer-motion を使わない自作。IntersectionObserver） */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 1s cubic-bezier(.22,.61,.36,1), transform 1s cubic-bezier(.22,.61,.36,1);
+  will-change: opacity, transform;
+}
+.reveal.is-in { opacity: 1; transform: none; }
+
+/* Hero の線画を「描かれる」ように出す。CSS だけ＝0KB（canvas も three.js も使わない） */
+.draw path, .draw line, .draw rect {
+  stroke-dasharray: var(--len, 400);
+  stroke-dashoffset: var(--len, 400);
+  animation: draw 1.5s cubic-bezier(.22,.61,.36,1) forwards;
+  animation-delay: var(--d, 0s);
+}
+.draw circle { opacity: 0; animation: pop .5s ease forwards; animation-delay: var(--d, 0s); }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes pop { to { opacity: var(--o, 1); } }
+@media (prefers-reduced-motion: reduce) {
+  .draw path, .draw line, .draw rect { stroke-dashoffset: 0; animation: none; }
+  .draw circle { opacity: var(--o, 1); animation: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .hero-mask > span { transform: none; animation: none; }
+  .label::before { width: 32px; transition: none; }
+  .progress { display: none; }
+  .hero-figure { transform: translateY(-40%); }
+  .card:hover { transform: none; }
+  html { scroll-behavior: auto; }
+}
+
+/* 緩急 —— 同じリズムが8回続くと単調になるので、奇数番のセクションに余白を足す。
+   各コンポーネントを書き換えずに済ませるため nth-of-type で当てる。 */
+main > section:nth-of-type(odd) { padding-top: 184px; padding-bottom: 184px; }
 
 @media (max-width: 860px) {
   .cols { grid-template-columns: 1fr; }
 }
 @media (max-width: 600px) {
+  main > section:nth-of-type(odd) { padding-top: 104px; padding-bottom: 104px; }
   html { font-size: 16px; }
-  .container { padding: 0 22px; }
-  .section { padding: 72px 0; }
-  .card { padding: 24px; }
+  .container { padding: 0 24px; }
+  .section { padding: 96px 0; }
+  .section--tight { padding: 72px 0; }
+  .section--wide { padding: 112px 0; }
+  .card { padding: 26px; }
 }

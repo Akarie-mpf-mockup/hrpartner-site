@@ -11,8 +11,9 @@ export default function Forms() {
   return (
     <section id="forms" className="section section--alt">
       <div className="container">
-        <p className="label">4つの進め方</p>
-        <h2 className="section-title">外部の使い方は、4つあります</h2>
+        <p className="label">Approaches</p>
+        <h2 className="section-title">採用を外に頼む、4つの形</h2>
+        <p className="section-sub">どれが優れているかではなく、手を動かすのが誰かと、終わったあとに何が残るかが違います。</p>
         <p className="section-lead">
           どれが優れているかではなく、<strong style={{ color: 'var(--text)' }}>手を動かすのが誰か</strong>と
           <strong style={{ color: 'var(--text)' }}>終わったあとに何が残るか</strong>が違います。
