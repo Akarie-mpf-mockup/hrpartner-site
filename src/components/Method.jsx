@@ -121,13 +121,15 @@ const PHASES = [
  *   ブロック（市場／競合／自社）自体も閉じられるようにし、**既定は3ブロックとも閉じる**。
  *   既定で見えるのは「市場・競合・自社 ＋ 各ブロックの項目数」の3行だけになる。
  *   → 12項目の一覧を出したいときは押して開く。
- *   ⚠ トレードオフは分かって選んでいる（実測の中身が既定で見えなくなる）。
- *     先頭の「市場」だけ開いた状態にしたい場合は useState の初期値を
- *     `new Set(['市場'])` にすれば戻せる（1行）。
+ *   ⚠ ただし**先頭の「市場」だけは開いた状態で出す**（2026-08-04 追記）。
+ *     3ブロックとも閉じると「12の実測」と見出しで言いながら、画面に実測の項目が
+ *     1つも見えない状態になる。これは Faq.jsx で一度指摘された失敗と同じ形
+ *     （「先にお答えしておきます」と書いてあるのに答えが1つも見えない → 先頭2問を開いた）。
+ *     全部閉じたい場合は初期値を `new Set()` に戻す（1行）。
  */
 export default function Method() {
   const [open, setOpen] = useState(() => new Set())
-  const [openPhase, setOpenPhase] = useState(() => new Set())
+  const [openPhase, setOpenPhase] = useState(() => new Set(['市場']))
   const toggle = (k) =>
     setOpen((prev) => {
       const next = new Set(prev)
@@ -212,9 +214,12 @@ export default function Method() {
           </p>
 
           <div className="samples">
+            {/* ⚠ パスは相対（'./'）。vite.config.js の base: './' と揃える。
+                絶対パス '/images/…' だと、確認用のサブパス配信
+                （akarie-mpf-mockup.github.io/hrpartner-site/）でだけ 404 になる。 */}
             {[
-              { src: '/images/sample-method.webp', cap: '1枚目に「調べ方」と、その出所を置きます。' },
-              { src: '/images/sample-table.webp', cap: 'バラバラの表記を同じ単位に直し、同じ表に並べます。' },
+              { src: './images/sample-method.webp', cap: '1枚目に「調べ方」と、その出所を置きます。' },
+              { src: './images/sample-table.webp', cap: 'バラバラの表記を同じ単位に直し、同じ表に並べます。' },
             ].map((s) => (
               <figure key={s.src} style={{ margin: 0 }}>
                 <img

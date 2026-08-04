@@ -116,25 +116,13 @@ export default function Nav() {
           border-bottom: 1px solid var(--accent);
           padding-bottom: 3px;
         }
+        /* 2026-08-04: この中に .brand / .brand__slash / .brand__b / @media 560px が
+           上と**同じ値のまま丸ごとコピー**されていた（貼り付けの取り残し）。
+           挙動は同じなので消した。狭い画面ですることは2つだけ——
+           欧文メニューを隠し、Contact だけ残す。 */
         @media (max-width: 980px) {
           .nav-links { display: none !important; }
-          .brand {
-          font-family: var(--font-display);
-          font-weight: 600;
-          letter-spacing: 0.04em;
-          font-size: 1.02rem;
-          display: inline-flex;
-          align-items: baseline;
-          gap: 8px;
-          white-space: nowrap;
-        }
-        .brand__slash { color: var(--text-dim); font-size: 0.86rem; }
-        .brand__b { color: var(--accent-text); }
-        @media (max-width: 560px) {
-          .brand__slash, .brand__b { display: none; }
-        }
-
-        .nav-contact { display: inline-block; }
+          .nav-contact { display: inline-block; }
         }
       `}</style>
     </header>

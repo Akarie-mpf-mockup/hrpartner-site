@@ -53,6 +53,32 @@ const declared = new Set(decodeURIComponent(new URL(m[1]).searchParams.get('text
 const browser = await chromium.launch()
 const page = await browser.newPage()
 await page.goto(TARGET, { waitUntil: 'networkidle' })
+
+// ★折りたたみを**全部開いてから**集める（2026-08-04）。
+//   Method と FAQ はアコーディオンになり、閉じている間は明朝の文字が DOM に無い。
+//   閉じたまま測ると「実使用 143 文字」しか見えず、
+//   その結果で text= を作り直すと **開いたときだけ項目名がゴシックに落ちる**。
+//   ⚠ 入れ子（ブロックを開くと中に項目のボタンが現れる）があるので、
+//     「閉じているものが無くなるまで」繰り返す。上限を置いて無限ループにしない。
+for (let pass = 0; pass < 5; pass++) {
+  const closed = page.locator('[aria-expanded="false"]')
+  const n = await closed.count()
+  if (n === 0) break
+  for (let i = 0; i < n; i++) {
+    // クリックで DOM が入れ替わるため、毎回 first() を取り直す
+    const el = page.locator('[aria-expanded="false"]').first()
+    if (!(await el.count())) break
+    await el.click({ timeout: 3000 }).catch(() => {})
+  }
+  await page.waitForTimeout(200)
+}
+const stillClosed = await page.locator('[aria-expanded="false"]').count()
+if (stillClosed > 0) {
+  console.error(`✗ 開けきれない折りたたみが ${stillClosed} 個あります（測り漏れになるので中止）。`)
+  await browser.close()
+  process.exit(2)
+}
+
 const used = await page.evaluate(() => {
   const out = new Set()
   const walk = (el) => {
