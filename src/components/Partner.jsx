@@ -14,10 +14,11 @@ const YOURS = [
   '給与・応募資格・勤務条件に関する経営判断',
 ]
 
-const MONTHLY = [
-  '求人原稿の書き換えと手入れ（対象拠点の求人すべて）',
-  '競合の条件・書き方の定点観測（毎月、比較表を更新）',
-  '応募データの整理と月次のご報告',
+// 2026-08-04: 旧 MONTHLY は6項目のうち3項目が OURS の言い直しだった
+// （原稿の書き換え／競合の定点観測／応募データの整理）。同じことを2枚のカードで
+// 2回読ませていたので、**重複しない3つだけ**に絞り、見出し側で「上の4つに加えて」と繋ぐ。
+// 月額に含む範囲（正典 :81-91）は OURS ＋ 本リストの和で変わらない。
+const MONTHLY_EXTRA = [
   'Google しごと検索に出る形の維持と、不具合の修正',
   '応募フォーム・応募導線の点検',
   '応募者管理（HRモンスター）の利用・設定・保守',
@@ -42,11 +43,9 @@ export default function Partner() {
       <div className="container">
         <SectionHead idx="02" en="Scope" />
         <h2 className="section-title">当方が持つ範囲と、御社にお願いする範囲</h2>
+        {/* 2026-08-04: sub と lead が同じことを2回言っていたので lead を落とした
+            （下の2枚のカードが同じ内容を項目で示しているため、散文は不要）。 */}
         <p className="section-sub">助言をお伝えするだけでも、システムをお渡しするだけでもありません。</p>
-        <p className="section-lead">
-          システムをお渡しするだけでも、助言をお伝えするだけでもなく、求人原稿の書き換え・競合条件の比較・
-          数字の整理まで当方が手を動かします。御社に残るのは、素材のご提供と条件に関する経営判断です。
-        </p>
 
         <div className="cols">
           <div className="card card--accent">
@@ -61,24 +60,21 @@ export default function Partner() {
 
         <div className="note">
           <strong>手を動かすところまで当方が持つ代わりに、判断は御社に残ります。</strong>
-          条件をどこまで動かせるかで打ち手が変わるため、そこだけは代わりに決めることができません。
-          逆に、原稿の書き換えや比較表の更新、データの整理をお願いすることはありません。
+          原稿の書き換えや比較表の更新、データの整理をお願いすることはありません。
         </div>
 
         <div style={{ marginTop: 64 }}>
           <h3 style={{ fontFamily: 'var(--font-sans)', fontSize: '1.4rem', fontWeight: 800 }}>毎月やること</h3>
-          <div className="cols" style={{ marginTop: 24 }}>
-            <div className="card">
-              <List items={MONTHLY.slice(0, 3)} mark="var(--accent)" />
-            </div>
-            <div className="card">
-              <List items={MONTHLY.slice(3)} mark="var(--accent)" />
-            </div>
+          <p className="section-sub" style={{ marginTop: 16 }}>
+            上の4つを毎月続けます。あわせて、次のものも月額に含みます。
+          </p>
+          <div className="card" style={{ marginTop: 24 }}>
+            <List items={MONTHLY_EXTRA} mark="var(--accent)" />
           </div>
+          {/* 「含まないもの」は誤解を防ぐ実質条項なので短くしても必ず残す（正典 :107-110）。 */}
           <div className="note">
-            境目は<strong>毎月の手入れか、仕組みを増やすか</strong>です。仕組みを増やすものは別途ご相談になります。<br />
             <strong>含まないもの</strong>＝面接・選考の代行／人材紹介／給与そのものの決定／媒体の掲載費／
-            日々の応募者対応そのもの（連絡・面接調整・選考判断）。
+            日々の応募者対応（連絡・面接調整・選考判断）。仕組みを増やすものは別途ご相談になります。
           </div>
         </div>
       </div>

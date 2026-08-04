@@ -16,11 +16,8 @@ export default function Chat() {
       <div className="container">
         <SectionHead idx="04" en="Chat" />
         <h2 className="section-title">採用ページに来た方への、その場の応答</h2>
-        <p className="section-sub">タグ1行から始められます。ご準備が整うまで表示されません。</p>
-        <p className="section-lead">
-          採用ページに1行のタグを入れると、来た方の疑問にその場で答えるようになります（HRチャット）。
-          管理画面でオンにするまで表示されないので、準備が終わってから公開できます。
-        </p>
+        {/* 2026-08-04: lead は下の4枚のカード（設置・答え方・準備・分かること）と同内容だったので落とした。 */}
+        <p className="section-sub">タグ1行から始められます。管理画面でオンにするまで表示されません。</p>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 20, marginTop: 40 }}>
           {POINTS.map((p) => (
@@ -34,8 +31,7 @@ export default function Chat() {
         </div>
 
         <div className="note">
-          サイトの情報がまだ薄い、という場合でも始められます。答える材料はこちらで用意します。
-          まずは<strong>何人来ているかが分かるようになる</strong>ところからです。
+          答える材料はこちらで用意します。まずは<strong>何人来ているかが分かるようになる</strong>ところからです。
         </div>
       </div>
     </section>

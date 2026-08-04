@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import SectionHead from './SectionHead'
 // 出所: 手順①〜⑫.md の全体マップ（市場①②③／競合④〜⑨／自社⑩⑪⑫）と各項目の「目的」「ツール」
 // 規約: 数字には出典と取得日を付ける／取れなかったものは「未取得」と書く
@@ -105,19 +106,36 @@ const PHASES = [
   },
 ]
 
+/**
+ * 2026-08-04: 「文字数が多過ぎる／わかりづらい」（ご指示）への対応。
+ *
+ * 旧版は12項目の説明文を全部開いて置いており、このセクションだけで **1,529字・4,318px**
+ * （ページ全体 4,610字 の 33%）を占めていた。読ませる前に量で負けている状態。
+ * → 既定は **項目名＋出所だけ**にし、説明文は押したときだけ開く。
+ *
+ * ⚠ FAQ と同じ挙動に揃える（`Faq.jsx`）。複数同時に開ける／閉じると項目名は残る。
+ *   ただし FAQ と違い**初期状態は全部閉じる**。ここは「何を見るか」の一覧が本体で、
+ *   説明文は補足だから（FAQ は答えが見えないと意味が無いので先頭2問を開けている）。
+ */
 export default function Method() {
+  const [open, setOpen] = useState(() => new Set())
+  const toggle = (k) =>
+    setOpen((prev) => {
+      const next = new Set(prev)
+      next.has(k) ? next.delete(k) : next.add(k)
+      return next
+    })
+
   return (
     <section id="method" className="section section--alt">
       <div className="container">
         <SectionHead idx="03" en="Method" />
         <h2 className="section-title">ご提案の前に行う、12の実測</h2>
-        <p className="section-sub">打ち手は、原因が市場・競合・自社のどこにあるかで変わります。</p>
-        <p className="section-lead">
-          「応募が来ない」の理由は、そもそも人がいないのか、見つかっていないのか、条件で負けているのかで違います。
-          どこに原因があるかを先に確かめてから、打ち手を選びます。
+        <p className="section-sub">
+          原因が市場・競合・自社のどこにあるかで、打ち手が変わります。項目を押すと、何を見るかが開きます。
         </p>
 
-        <div style={{ marginTop: 72, display: 'grid', gap: 72 }}>
+        <div style={{ marginTop: 56, display: 'grid', gap: 56 }}>
           {PHASES.map((p) => (
             <div key={p.name}>
               <div
@@ -134,56 +152,33 @@ export default function Method() {
               </div>
 
               <ol style={{ listStyle: 'none', display: 'grid', gap: 0 }}>
-                {p.items.map((it) => (
-                  <li
-                    key={it.n}
-                    style={{
-                      display: 'grid',
-                      gridTemplateColumns: '2.4rem 1fr',
-                      gap: 20,
-                      padding: '28px 0',
-                      borderBottom: '1px solid var(--rule-soft)',
-                    }}
-                  >
-                    <span
-                      style={{
-                        fontFamily: 'var(--font-display)',
-                        fontSize: '1.1rem',
-                        color: 'var(--accent-ink)',
-                        lineHeight: 1.6,
-                      }}
-                    >
-                      {it.n}
-                    </span>
-                    <div>
-                      <p style={{ fontFamily: 'var(--font-display)', fontSize: '1.12rem', fontWeight: 600, lineHeight: 1.7 }}>
-                        {it.t}
-                      </p>
-                      <p style={{ marginTop: 10, fontSize: '0.94rem', color: 'var(--text-muted)', maxWidth: '62ch' }}>
-                        {it.d}
-                      </p>
-                      <p
-                        style={{
-                          marginTop: 12,
-                          fontFamily: 'var(--font-mono)',
-                          fontSize: '0.66rem',
-                          letterSpacing: '0.12em',
-                          color: 'var(--text-dim)',
-                        }}
+                {p.items.map((it) => {
+                  const isOpen = open.has(it.n)
+                  return (
+                    <li key={it.n} style={{ borderBottom: '1px solid var(--rule-soft)' }}>
+                      <button
+                        onClick={() => toggle(it.n)}
+                        aria-expanded={isOpen}
+                        className="mrow"
                       >
-                        出所 —— {it.s}
-                      </p>
-                    </div>
-                  </li>
-                ))}
+                        <span className="mrow__n">{it.n}</span>
+                        <span className="mrow__t">{it.t}</span>
+                        <span className="mrow__s">{it.s}</span>
+                        <span aria-hidden className="mrow__p" data-open={isOpen ? '1' : '0'}>＋</span>
+                      </button>
+                      {isOpen && (
+                        <p className="mrow__d">{it.d}</p>
+                      )}
+                    </li>
+                  )
+                })}
               </ol>
             </div>
           ))}
         </div>
 
         <div className="note">
-          数字には<strong>出典と取得日</strong>を付けます。順位や検索ボリュームは、いつ・どこから調べたかで変わるためです。
-          取れなかったものは「未取得」と書きます。埋めません。
+          数字には<strong>出典と取得日</strong>を付けます。取れなかったものは「未取得」と書きます。埋めません。
         </div>
 
         {/* ご報告の見本。
@@ -199,12 +194,12 @@ export default function Method() {
             お持ちするものの見本
           </h3>
           <p className="section-sub">
-            数字だけをお渡しすることはありません。何を見て、どこから取ったかを必ず添えます。
+            何を見て、どこから取ったかを必ず添えます。
           </p>
 
           <div className="samples">
             {[
-              { src: '/images/sample-method.webp', cap: '1枚目に「調べ方」を置きます。件数と、その出所を並べます。' },
+              { src: '/images/sample-method.webp', cap: '1枚目に「調べ方」と、その出所を置きます。' },
               { src: '/images/sample-table.webp', cap: 'バラバラの表記を同じ単位に直し、同じ表に並べます。' },
             ].map((s) => (
               <figure key={s.src} style={{ margin: 0 }}>
@@ -245,6 +240,53 @@ export default function Method() {
         <style>{`
           .samples { margin-top: 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
           @media (max-width: 820px) { .samples { grid-template-columns: 1fr; gap: 40px; } }
+
+          /* 12項目の1行。既定は「番号・項目名・出所」だけを出し、説明文は押したら開く。
+             ⚠ button の既定スタイル（背景・枠・中央寄せ・小さい文字）を全部打ち消す。
+               font: inherit を忘れると Chrome の 13.333px 系フォントに落ちる（Faq.jsx と同じ作法）。 */
+          .mrow {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 2.4rem minmax(0, 1fr) minmax(0, auto) 1.4rem;
+            align-items: baseline;
+            gap: 20px;
+            padding: 22px 0;
+            background: none;
+            border: none;
+            text-align: left;
+            font: inherit;
+            cursor: pointer;
+          }
+          .mrow__n { font-family: var(--font-display); font-size: 1.1rem; color: var(--accent-ink); }
+          .mrow__t { font-family: var(--font-display); font-size: 1.12rem; font-weight: 600; line-height: 1.7; }
+          .mrow__s {
+            font-family: var(--font-mono);
+            font-size: 0.64rem;
+            letter-spacing: 0.1em;
+            color: var(--text-dim);
+            text-align: right;
+            line-height: 1.9;
+          }
+          .mrow__p { color: var(--accent-text); transition: transform .2s; justify-self: end; }
+          .mrow__p[data-open='1'] { transform: rotate(45deg); }
+          .mrow__d {
+            margin: 0 0 24px;
+            padding-left: calc(2.4rem + 20px);
+            max-width: 62ch;
+            font-size: 0.94rem;
+            color: var(--text-muted);
+          }
+          /* 狭い画面では出所を項目名の下へ落とす（横に4列は入らない）。
+             ⚠ 位置は grid-row / grid-column で**明示**する。自動配置に任せると
+               ＋ が2行目に回り込む（列を跨いだ要素の後ろは自動カーソルが進む）。 */
+          @media (max-width: 760px) {
+            .mrow { grid-template-columns: 2.2rem minmax(0, 1fr) 1.4rem; gap: 0 16px; }
+            .mrow__n { grid-column: 1; grid-row: 1; }
+            .mrow__t { grid-column: 2; grid-row: 1; }
+            .mrow__p { grid-column: 3; grid-row: 1; }
+            .mrow__s { grid-column: 2; grid-row: 2; text-align: left; margin-top: 4px; }
+            .mrow__d { padding-left: calc(2.2rem + 16px); }
+          }
         `}</style>
       </div>
     </section>

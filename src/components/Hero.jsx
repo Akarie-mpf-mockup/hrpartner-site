@@ -94,10 +94,29 @@ export default function Hero() {
         </h1>
 
         <p className="hero-lead">
-          求人原稿の書き換えから、採用ページのご用意、応募導線の点検まで。
-          <br />
           <span style={{ color: 'var(--ink)' }}>助言ではなく、こちらが手を動かします。</span>
         </p>
+
+        {/* 2026-08-04: 「何の商品か一目瞭然にしたい」（ご指示）への対応。
+            旧版のリード文は「求人原稿の書き換えから、採用ページのご用意、応募導線の点検まで」と
+            同じ内容を散文で並べていたが、初見の191字の中に**納品物の名詞が1つも無かった**。
+            見出し（テーマ型）は正典 01_コンセプトとページ構成:99 の型なので変えず、
+            直下に納品物を3つだけ並べる。文章にしない＝読ませずに見せる。
+            ⚠ 書体は必ず var(--font-body)（ゴシック）。--font-sans は明朝に向いており、
+              明朝で出すと index.css の text= サブセットに無い文字が無言でゴシックに落ちる。 */}
+        <ul className="hero-deliv">
+          {[
+            ['01', '採用ページを新設', '現行サイトは触りません'],
+            ['02', '求人原稿を書き換え', '対象拠点の求人すべて'],
+            ['03', '毎月の手入れと報告', '競合の定点観測つき'],
+          ].map(([n, t, d]) => (
+            <li key={n}>
+              <span className="hero-deliv__n">{n}</span>
+              <span className="hero-deliv__t">{t}</span>
+              <span className="hero-deliv__d">{d}</span>
+            </li>
+          ))}
+        </ul>
 
         <div className="hero-cta">
           <a href="#contact" className="btn btn--primary">まず採用ページを見てもらう</a>

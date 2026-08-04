@@ -40,9 +40,9 @@ export default function Pricing() {
           {STATS.map((s) => <Stat key={s.k} s={s} />)}
         </div>
 
+        {/* 2026-08-04: 1文目が section-sub の言い直しだったので落とし、見積りの条件だけ残した。 */}
         <div className="note">
-          費用は<strong>対象拠点の数</strong>で決まります。支援の対象に含める事業所を、ご契約のときに名前で挙げて数えます。
-          対象の範囲によって作業量が変わるため、拠点数と職種数を伺ったうえでお見積りします。
+          対象の範囲によって作業量が変わるため、<strong>拠点数と職種数</strong>を伺ったうえでお見積りします。
         </div>
 
         <p style={{ marginTop: 18, fontSize: '0.84rem', color: 'var(--text-dim)' }}>

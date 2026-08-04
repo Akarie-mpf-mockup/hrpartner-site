@@ -404,7 +404,7 @@ main > section:nth-of-type(odd) { padding-top: 184px; padding-bottom: 184px; }
   display: grid;
   place-items: center;
   position: relative;
-  padding: calc(var(--nav-h) + 40px) 48px 120px;
+  padding: calc(var(--nav-h) + 32px) 48px 96px;
   text-align: center;
   border-bottom: 1px solid var(--rule-soft);
 }
@@ -415,25 +415,78 @@ main > section:nth-of-type(odd) { padding-top: 184px; padding-bottom: 184px; }
   font-size: 0.66rem;
   letter-spacing: 0.3em;
   color: var(--text-dim);
-  margin-bottom: 34px;
+  /* 2026-08-04: 3点セットを足したぶん、Hero 内の余白を全体的に詰めた
+     （追加前 inner 588px → 追加後 634px → 詰めて 588px 前後に戻す）。 */
+  margin-bottom: 22px;
 }
 .hero-h1 {
   font-family: var(--font-display);
   font-size: clamp(2.1rem, 5.6vw, 4.1rem);
   font-weight: 600;
-  line-height: 1.5;
+  line-height: 1.44;
   letter-spacing: 0.02em;
 }
 .hero-lead {
-  margin: 40px auto 0;
+  margin: 22px auto 0;
   max-width: 46ch;
   font-size: 0.98rem;
   color: var(--text-muted);
   line-height: 2.05;
 }
-.hero-cta { margin-top: 52px; display: flex; flex-wrap: wrap; gap: 32px; justify-content: center; align-items: center; }
+
+/* 納品物の3点（2026-08-04）。
+   ★文章ではなく「名詞3つ」で見せる枠。ここを読ませる対象にしない。
+   ⚠ Hero は min-height: 100vh の中央寄せなので、要素を1つ足すと下の SCROLL と当たる。
+     追加ぶんは lead / cta / terms の余白を詰めて相殺した（実測で 1280×800 に収まる）。 */
+.hero-deliv {
+  margin: 26px auto 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;                                  /* 罫1本ぶん。カードにせず「面を割る」表現 */
+  background: var(--rule-soft);              /* 隙間が罫に見える */
+  border: 1px solid var(--rule-soft);
+  max-width: 680px;
+  text-align: left;
+}
+.hero-deliv li {
+  background: rgba(253, 251, 248, 0.82);
+  padding: 18px 20px;
+  display: grid;
+  gap: 4px;
+}
+.hero-deliv__n {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: var(--accent-text);
+}
+.hero-deliv__t {
+  font-family: var(--font-body);             /* ⚠ 明朝にしない（サブセット漏れ防止） */
+  font-size: 0.97rem;
+  font-weight: 700;
+  line-height: 1.6;
+  color: var(--ink);
+}
+.hero-deliv__d {
+  font-family: var(--font-body);
+  font-size: 0.76rem;
+  line-height: 1.7;
+  color: var(--text-dim);
+}
+/* ⚠ 狭い画面でも**縦積みにしない**。1列にすると3行ぶん（実測 +240px）伸びて
+   ファーストビューから CTA と価格が押し出され、「一目で分かる」目的が壊れる。
+   横3列のまま字を詰め、補足の1行だけ落とす。 */
+@media (max-width: 700px) {
+  .hero-deliv { max-width: 100%; }
+  .hero-deliv li { padding: 12px 10px; gap: 2px; }
+  .hero-deliv__t { font-size: 0.8rem; line-height: 1.5; }
+  .hero-deliv__n { font-size: 0.54rem; }
+  .hero-deliv__d { display: none; }
+}
+
+.hero-cta { margin-top: 34px; display: flex; flex-wrap: wrap; gap: 32px; justify-content: center; align-items: center; }
 .hero-terms {
-  margin-top: 40px;
+  margin-top: 22px;
   font-family: var(--font-mono);
   font-size: 0.68rem;
   letter-spacing: 0.14em;
@@ -498,6 +551,18 @@ main > section:nth-of-type(odd) { padding-top: 184px; padding-bottom: 184px; }
   .hero-meta--tr, .hero-meta--left { display: none; }
   .hero-meta--br { right: 24px; bottom: 76px; }
   .hero-line { white-space: normal; }
+}
+
+/* 狭い画面の初見の崩れを直す（2026-08-04・実機幅 390px のスクリーンショットで確認）。
+   ⚠ どちらも今回の追加で生じたものではなく**公開時から出ていた**。
+     「文字数を減らして一目で分かるように」の目的に直接ぶつかるのでここで直す。
+   1) 見出しが3行になり「る。」だけが取り残されていた → 幅に収まる字送りへ落とす
+   2) 条件表記（月額…）が2行になり、四隅のメタと SCROLL の上に重なっていた
+      → 装飾のメタは隠し、条件表記は1行に収まる字間にする（意味を持つ文字を優先） */
+@media (max-width: 480px) {
+  .hero-h1 { font-size: 1.86rem; }
+  .hero-meta--br { display: none; }
+  .hero-terms { font-size: 0.62rem; letter-spacing: 0.06em; }
 }
 
 @media (prefers-reduced-motion: reduce) {
