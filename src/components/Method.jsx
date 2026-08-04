@@ -116,11 +116,26 @@ const PHASES = [
  * ⚠ FAQ と同じ挙動に揃える（`Faq.jsx`）。複数同時に開ける／閉じると項目名は残る。
  *   ただし FAQ と違い**初期状態は全部閉じる**。ここは「何を見るか」の一覧が本体で、
  *   説明文は補足だから（FAQ は答えが見えないと意味が無いので先頭2問を開けている）。
+ *
+ * 2026-08-04（第2段・ご指示「Method の12項目を折りたたむ」）:
+ *   ブロック（市場／競合／自社）自体も閉じられるようにし、**既定は3ブロックとも閉じる**。
+ *   既定で見えるのは「市場・競合・自社 ＋ 各ブロックの項目数」の3行だけになる。
+ *   → 12項目の一覧を出したいときは押して開く。
+ *   ⚠ トレードオフは分かって選んでいる（実測の中身が既定で見えなくなる）。
+ *     先頭の「市場」だけ開いた状態にしたい場合は useState の初期値を
+ *     `new Set(['市場'])` にすれば戻せる（1行）。
  */
 export default function Method() {
   const [open, setOpen] = useState(() => new Set())
+  const [openPhase, setOpenPhase] = useState(() => new Set())
   const toggle = (k) =>
     setOpen((prev) => {
+      const next = new Set(prev)
+      next.has(k) ? next.delete(k) : next.add(k)
+      return next
+    })
+  const togglePhase = (k) =>
+    setOpenPhase((prev) => {
       const next = new Set(prev)
       next.has(k) ? next.delete(k) : next.add(k)
       return next
@@ -132,49 +147,48 @@ export default function Method() {
         <SectionHead idx="03" en="Method" />
         <h2 className="section-title">ご提案の前に行う、12の実測</h2>
         <p className="section-sub">
-          原因が市場・競合・自社のどこにあるかで、打ち手が変わります。項目を押すと、何を見るかが開きます。
+          原因が市場・競合・自社のどこにあるかで、打ち手が変わります。押すと、実際に見る項目が開きます。
         </p>
 
-        <div style={{ marginTop: 56, display: 'grid', gap: 56 }}>
-          {PHASES.map((p) => (
-            <div key={p.name}>
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'baseline',
-                  gap: 20,
-                  paddingBottom: 18,
-                  borderBottom: '1px solid var(--rule)',
-                }}
-              >
-                <span style={{ fontFamily: 'var(--font-display)', fontSize: '1.5rem', fontWeight: 600 }}>{p.name}</span>
-                <span style={{ fontSize: '0.9rem', color: 'var(--text-dim)' }}>{p.sub}</span>
-              </div>
+        <div style={{ marginTop: 48, display: 'grid', gap: 24 }}>
+          {PHASES.map((p) => {
+            const pOpen = openPhase.has(p.name)
+            return (
+              <div key={p.name}>
+                <button className="mphase" onClick={() => togglePhase(p.name)} aria-expanded={pOpen}>
+                  <span className="mphase__n">{p.name}</span>
+                  <span className="mphase__s">{p.sub}</span>
+                  <span className="mphase__c">{p.items.length}項目</span>
+                  <span aria-hidden className="mphase__p" data-open={pOpen ? '1' : '0'}>＋</span>
+                </button>
 
-              <ol style={{ listStyle: 'none', display: 'grid', gap: 0 }}>
-                {p.items.map((it) => {
-                  const isOpen = open.has(it.n)
-                  return (
-                    <li key={it.n} style={{ borderBottom: '1px solid var(--rule-soft)' }}>
-                      <button
-                        onClick={() => toggle(it.n)}
-                        aria-expanded={isOpen}
-                        className="mrow"
-                      >
-                        <span className="mrow__n">{it.n}</span>
-                        <span className="mrow__t">{it.t}</span>
-                        <span className="mrow__s">{it.s}</span>
-                        <span aria-hidden className="mrow__p" data-open={isOpen ? '1' : '0'}>＋</span>
-                      </button>
-                      {isOpen && (
-                        <p className="mrow__d">{it.d}</p>
-                      )}
-                    </li>
-                  )
-                })}
-              </ol>
-            </div>
-          ))}
+                {pOpen && (
+                  <ol style={{ listStyle: 'none', display: 'grid', gap: 0 }}>
+                    {p.items.map((it) => {
+                      const isOpen = open.has(it.n)
+                      return (
+                        <li key={it.n} style={{ borderBottom: '1px solid var(--rule-soft)' }}>
+                          <button
+                            onClick={() => toggle(it.n)}
+                            aria-expanded={isOpen}
+                            className="mrow"
+                          >
+                            <span className="mrow__n">{it.n}</span>
+                            <span className="mrow__t">{it.t}</span>
+                            <span className="mrow__s">{it.s}</span>
+                            <span aria-hidden className="mrow__p" data-open={isOpen ? '1' : '0'}>＋</span>
+                          </button>
+                          {isOpen && (
+                            <p className="mrow__d">{it.d}</p>
+                          )}
+                        </li>
+                      )
+                    })}
+                  </ol>
+                )}
+              </div>
+            )
+          })}
         </div>
 
         <div className="note">
@@ -240,6 +254,41 @@ export default function Method() {
         <style>{`
           .samples { margin-top: 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
           @media (max-width: 820px) { .samples { grid-template-columns: 1fr; gap: 40px; } }
+
+          /* ブロックの1行（市場／競合／自社）。既定は閉じており、ここだけが見えている。
+             ⚠ 見出しの体裁（明朝1.5rem）は旧 <div> のときと同じに保つ。button の既定を打ち消す。 */
+          .mphase {
+            width: 100%;
+            display: grid;
+            grid-template-columns: minmax(0, auto) minmax(0, 1fr) minmax(0, auto) 1.4rem;
+            align-items: baseline;
+            gap: 20px;
+            padding: 0 0 16px;
+            background: none;
+            border: none;
+            border-bottom: 1px solid var(--rule);
+            text-align: left;
+            font: inherit;
+            cursor: pointer;
+          }
+          .mphase__n { font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; }
+          .mphase__s { font-size: 0.9rem; color: var(--text-dim); }
+          .mphase__c {
+            font-family: var(--font-mono);
+            font-size: 0.66rem;
+            letter-spacing: 0.12em;
+            color: var(--accent-text);
+            white-space: nowrap;
+          }
+          .mphase__p { color: var(--accent-text); font-size: 1.1rem; transition: transform .2s; justify-self: end; }
+          .mphase__p[data-open='1'] { transform: rotate(45deg); }
+          @media (max-width: 620px) {
+            .mphase { grid-template-columns: minmax(0, 1fr) 1.4rem; gap: 4px 12px; }
+            .mphase__n { grid-column: 1; grid-row: 1; }
+            .mphase__p { grid-column: 2; grid-row: 1; }
+            .mphase__s { grid-column: 1; grid-row: 2; }
+            .mphase__c { grid-column: 1; grid-row: 3; }
+          }
 
           /* 12項目の1行。既定は「番号・項目名・出所」だけを出し、説明文は押したら開く。
              ⚠ button の既定スタイル（背景・枠・中央寄せ・小さい文字）を全部打ち消す。
