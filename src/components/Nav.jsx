@@ -62,17 +62,17 @@ export default function Nav() {
             ⚠ 色だけで区別しない（色覚と、地が生成りで彩度差が出にくいため）。
               下線＋濃さ＋読み上げ用の (現在の位置) をセットで付ける。
             ⚠ 下線は border を出し入れせず、常に透明の border を敷いて色だけ変える（ズレ防止）。 */}
-        <a href="#top" className="brand" data-on={active === 'chat' ? 'chat' : 'partner'}>
-          <span className="brand__a">
+        <nav className="brand" data-on={active === 'chat' ? 'chat' : 'partner'} aria-label="サービス内ナビゲーション">
+          <a href="#top" className="brand__a" aria-current={active !== 'chat' ? 'location' : undefined}>
             HRパートナー
             {active !== 'chat' && <span className="brand__sr">（現在の位置）</span>}
-          </span>
+          </a>
           <span className="brand__slash">／</span>
-          <span className="brand__b">
+          <a href="#chat" className="brand__b" aria-current={active === 'chat' ? 'location' : undefined}>
             HRチャット
             {active === 'chat' && <span className="brand__sr">（現在の位置）</span>}
-          </span>
-        </a>
+          </a>
+        </nav>
 
         <nav style={{ display: 'flex', alignItems: 'center', gap: 26 }}>
           {/* 狭い画面では nav-links を隠すため、問い合わせ導線だけは必ず残す
@@ -130,6 +130,10 @@ export default function Nav() {
         }
         .brand[data-on='partner'] .brand__a { color: var(--ink); border-bottom-color: var(--accent); }
         .brand[data-on='chat'] .brand__b { color: var(--accent-text); border-bottom-color: var(--accent); }
+        .brand__a:focus-visible, .brand__b:focus-visible {
+          outline: 2px solid var(--accent);
+          outline-offset: 4px;
+        }
         /* 読み上げ専用。目には見えないが「（現在の位置）」を読み上げる。
            ⚠ 書体は明朝から外す（var(--font-body)）。見えない文字のために
              明朝サブセットへ「（現在位置）」の5文字を足すことになるため
