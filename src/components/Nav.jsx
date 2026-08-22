@@ -10,19 +10,20 @@ import { useScrollProgress, useActiveSection } from '../motion'
 //   参考サイトの体裁を写すのは、意味を落とさない範囲まで（見出しの欧文＝SectionHead は
 //   すぐ下に日本語の <h2> があるので、あちらは欧文のまま）。
 const LINKS = [
-  { href: '#forms', ja: '4つの形' },
-  { href: '#partner', ja: 'できること' },
+  { href: '#forms', ja: '外部依存' },
+  { href: '#partner', ja: '自社経路' },
   { href: '#method', ja: '調べ方' },
+  { href: '#diagnosis', ja: '無料・有料診断' },
   { href: '#chat', ja: 'HRチャット' },
   { href: '#flow', ja: '進め方' },
   { href: '#pricing', ja: '費用' },
   { href: '#faq', ja: 'よくある質問' },
-  { href: '#contact', ja: 'お問い合わせ' },
+  { href: '#contact', ja: '診断を選ぶ' },
 ]
 
 // ⚠ chat / contact が抜けていた（＝そのセクションを見ていてもナビが光らなかった）。
 //   肩の「HRパートナー ／ HRチャット」の切り替えにも chat の判定を使うので、両方入れる。
-const IDS = ['forms', 'partner', 'method', 'chat', 'flow', 'pricing', 'faq', 'contact']
+const IDS = ['forms', 'partner', 'method', 'diagnosis', 'chat', 'flow', 'pricing', 'faq', 'contact']
 
 export default function Nav() {
   const [solid, setSolid] = useState(false)
@@ -76,7 +77,7 @@ export default function Nav() {
         <nav style={{ display: 'flex', alignItems: 'center', gap: 26 }}>
           {/* 狭い画面では nav-links を隠すため、問い合わせ導線だけは必ず残す
               （消すと小さい画面から問い合わせに行けなくなる） */}
-          <a href="#contact" className="nav-contact">お問い合わせ</a>
+          <a href="#diagnosis" className="nav-contact">診断を選ぶ</a>
 
           <ul className="nav-links">
             {LINKS.map((l) => (

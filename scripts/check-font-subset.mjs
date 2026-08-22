@@ -42,12 +42,14 @@ const CSS = new URL('../src/index.css', import.meta.url).pathname
 
 // --- CSS の text= を読む ------------------------------------------------------
 const css = readFileSync(CSS, 'utf8')
-const m = css.match(/@import url\('([^']*text=[^']*)'\)/)
-if (!m) {
+const imports = [...css.matchAll(/@import url\('([^']*text=[^']*)'\)/g)]
+if (imports.length === 0) {
   console.error('✗ index.css に text= 付きの @import が見つかりません。')
   process.exit(2)
 }
-const declared = new Set(decodeURIComponent(new URL(m[1]).searchParams.get('text') || ''))
+const declared = new Set(
+  imports.flatMap((m) => [...decodeURIComponent(new URL(m[1]).searchParams.get('text') || '')])
+)
 
 // --- 実際に明朝で描画されている文字を集める ----------------------------------
 const browser = await chromium.launch()

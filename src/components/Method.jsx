@@ -57,7 +57,7 @@ const PHASES = [
       {
         n: '⑥',
         t: '競合の原稿の書き方',
-        d: '⑤で集めた求人票の書き方を比べます。タイトルに地名や数字が入っているか、働く人の言葉があるか。条件を変えずに勝てる唯一の領域です。',
+        d: '⑤で集めた求人票の書き方を比べます。タイトルに地名や数字が入っているか、働く人の言葉があるか。条件を変えずに改善できる領域です。',
         s: '⑤で開いた求人票そのもの',
       },
       {
@@ -251,9 +251,9 @@ export default function Method() {
 
         <div style={{ marginTop: 56, display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 32 }}>
           <p style={{ fontSize: '1.0rem', maxWidth: '46ch' }}>
-            このうち⑩は、お申し込みいただければ、ご商談の前に一枚にしてお持ちします。
+            公開情報で確認できる範囲は無料診断で、応募・採用・費用データまで含める場合は有料診断で調べます。
           </p>
-          <a href="#contact" className="btn btn--ghost">採用ページを見てもらう</a>
+          <a href="#diagnosis" className="btn btn--ghost">無料・有料診断を選ぶ</a>
         </div>
 
         <style>{`

@@ -5,6 +5,7 @@ import Hero from './components/Hero'
 import Forms from './components/Forms'
 import Partner from './components/Partner'
 import Method from './components/Method'
+import Diagnosis from './components/Diagnosis'
 import Chat from './components/Chat'
 import Flow from './components/Flow'
 import Pricing from './components/Pricing'
@@ -76,6 +77,7 @@ export default function App() {
         <Forms />
         <Partner />
         <Method />
+        <Diagnosis />
         <Chat />
         <Flow />
         <Pricing />

@@ -5,8 +5,16 @@ import SectionHead from './SectionHead'
 //       0_メニューと価格_松竹梅_20260731.md:23（3ヶ月単位）, :107-110（含まないもの）, :34（1拠点から）
 const ITEMS = [
   {
+    q: '無料診断と有料診断は何が違いますか',
+    a: '無料診断は公開情報だけで、採用ページ・検索・地図・SNS・応募導線の土台を確認します。有料診断は拠点別の応募数、採用数、媒体費、紹介手数料も確認し、外部依存比率と実行優先順位までまとめます。',
+  },
+  {
+    q: 'InstagramやSNSの運用もお願いできますか',
+    a: '可能です。投稿企画、素材制作、投稿運用のどこまでを支援するか、診断結果と社内体制を見て対象範囲を決めます。撮影や大幅な動画制作は別途お見積りします。',
+  },
+  {
     q: '今のホームページを作り替える必要がありますか',
-    a: 'ありません。別のドメインに採用ページを新しく用意します。現行のサイトは触りません。',
+    a: '必ずしも必要ありません。現行サイトを更新できる場合は今ある資産を活かし、難しい場合は別のドメインに採用ページをご用意します。',
   },
   {
     q: 'タグを入れる作業は誰がやりますか',
@@ -42,7 +50,7 @@ export default function Faq() {
   return (
     <section id="faq" className="section section--alt">
       <div className="container">
-        <SectionHead idx="07" en="FAQ" />
+        <SectionHead idx="08" en="FAQ" />
         <h2 className="section-title">ご検討の前に、よくいただくご質問</h2>
 
         <div style={{ marginTop: 40, display: 'grid', gap: 12 }}>

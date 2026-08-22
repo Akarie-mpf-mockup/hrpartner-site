@@ -1,43 +1,30 @@
-// CTA は1本に絞る（01_コンセプトとページ構成 §2-1 の注記）。
-// ⚠ 「診断」という語は客先で使わない（手順①〜⑫.md:521 鉄則5）。「見て気づいたこと」「ご報告」と言う。
-// 送信先は support@robottte.com に決定（2026-08-03）。
-// robottte-site の Contact.jsx も外部フォームではなくメールリンク（kiban@robottte.com）で、方式は揃っている。
 const MAIL = 'support@robottte.com'
 
-export default function Contact() {
-  const subject = encodeURIComponent('採用ページについてのご相談')
-  const body = encodeURIComponent(
-    [
-      '会社名：',
-      'お名前：',
-      '採用ページの URL：',
-      'お困りのこと：',
-      '',
-      '（採用したい職種・拠点の数が分かれば、あわせてご記入ください）',
-    ].join('\n')
-  )
+function link(type) {
+  const subject = encodeURIComponent(`HRパートナー ${type}のお申し込み`)
+  const body = encodeURIComponent([
+    `希望する診断：${type}`, '会社名：', 'お名前：', '対象拠点：',
+    '採用したい職種：', '採用ページのURL：', '現在お使いの求人媒体・人材紹介：',
+  ].join('\n'))
+  return `mailto:${MAIL}?subject=${subject}&body=${body}`
+}
 
+export default function Contact() {
   return (
     <section id="contact" className="section section--ink">
       <div className="container">
         <div style={{ padding: 'clamp(20px, 4vw, 48px) 0', textAlign: 'center' }}>
-          <p className="label" style={{ justifyContent: 'center' }}>Contact</p>
-          <h2 className="section-title" style={{ maxWidth: '28ch', margin: '0 auto' }}>
-            まずは、採用ページを見せていただくところから
-          </h2>
-          <p style={{ marginTop: 24, color: 'var(--text-muted)', maxWidth: '56ch', margin: '24px auto 0' }}>
-            URL をいただければ、求人が検索で認識される形になっているかを確認して、一枚にまとめてお返しします。
-            ご商談の前に、お読みいただくだけで構いません。
+          <p className="label" style={{ justifyContent: 'center' }}>Choose</p>
+          <h2 className="section-title" style={{ maxWidth: '28ch', margin: '0 auto' }}>どちらの診断から始めますか</h2>
+          <p style={{ marginTop: 24, color: 'var(--text-muted)', maxWidth: '60ch', margin: '24px auto 0' }}>
+            公開情報から土台を見る無料診断と、拠点別の外部依存比率・原因・実行計画まで調べる有料診断からお選びください。
           </p>
-
-          <div style={{ marginTop: 36 }}>
-            <a href={`mailto:${MAIL}?subject=${subject}&body=${body}`} className="btn btn--primary">
-              メールで相談する
-            </a>
+          <div style={{ marginTop: 36, display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 28 }}>
+            <a href={link('無料診断')} className="btn btn--primary">無料診断を選ぶ</a>
+            <a href={link('有料診断')} className="btn btn--ghost">有料診断を選ぶ</a>
           </div>
-
           <p style={{ marginTop: 20, fontSize: '0.84rem', color: 'var(--text-dim)' }}>
-            {MAIL} ／ 会社名・お名前・採用ページの URL をお知らせください
+            {MAIL} ／ 会社名・対象拠点・採用したい職種をお知らせください
           </p>
         </div>
       </div>

@@ -66,16 +66,16 @@ export default function Hero() {
   return (
     <section id="top" className="hero">
       {/* 四隅のメタ情報。参考サイトはいずれも本文の外側に索引・章番号・欧文の副題を置く */}
-      <div className="hero-meta hero-meta--tr" aria-hidden="true">HR PARTNER ／ 採用の入口</div>
+      <div className="hero-meta hero-meta--tr" aria-hidden="true">HR PARTNER ／ 拠点採用の自走化</div>
       <div className="hero-meta hero-meta--left" aria-hidden="true">
         <span className="hero-meta__cap">SCOPE</span>
-        <span className="hero-meta__num">12</span>
+        <span className="hero-meta__num">05</span>
         <span className="hero-meta__bar" />
       </div>
       <div className="hero-meta hero-meta--br" aria-hidden="true">
         <span className="hero-meta__idx">01</span>
-        <span className="hero-meta__ja">採用の入口</span>
-        <span className="hero-meta__lat">a quiet fix at the entrance.</span>
+        <span className="hero-meta__ja">採用の自走化</span>
+        <span className="hero-meta__lat">build an owned hiring route.</span>
       </div>
 
       {/* 図は見出しの背面中央。lab/04 の魚と同じ扱い */}
@@ -86,15 +86,15 @@ export default function Hero() {
       </div>
 
       <div ref={ref} className="reveal hero-inner">
-        <p className="hero-kicker">HR PARTNER ／ 採用支援</p>
+        <p className="hero-kicker">HR PARTNER ／ 拠点単位の採用自走化支援</p>
 
         <h1 className="hero-h1">
-          <span className="hero-mask hero-line"><span>採用の入口を、</span></span>
-          <span className="hero-mask hero-line"><span>御社と一緒に整える。</span></span>
+          <span className="hero-mask hero-line"><span>外部依存の高い拠点に、</span></span>
+          <span className="hero-mask hero-line"><span>採用の自走力を。</span></span>
         </h1>
 
         <p className="hero-lead">
-          <span style={{ color: 'var(--ink)' }}>助言ではなく、こちらが手を動かします。</span>
+          求人媒体・人材紹介に頼りきった採用を、拠点から変えていきます。
         </p>
 
         {/* 2026-08-04: 「何の商品か一目瞭然にしたい」（ご指示）への対応。
@@ -106,9 +106,9 @@ export default function Hero() {
               明朝で出すと index.css の text= サブセットに無い文字が無言でゴシックに落ちる。 */}
         <ul className="hero-deliv">
           {[
-            ['01', '採用ページを新設', '現行サイトは触りません'],
-            ['02', '求人原稿を書き換え', '対象拠点の求人すべて'],
-            ['03', '毎月の手入れと報告', '競合の定点観測つき'],
+            ['01', '検索・地図', 'SEO／MEO'],
+            ['02', 'Instagram・SNS', '働く姿を伝える'],
+            ['03', '採用ページ・応募導線', 'AIチャットまで'],
           ].map(([n, t, d]) => (
             <li key={n}>
               <span className="hero-deliv__n">{n}</span>
@@ -119,11 +119,11 @@ export default function Hero() {
         </ul>
 
         <div className="hero-cta">
-          <a href="#contact" className="btn btn--primary">まず採用ページを見てもらう</a>
-          <a href="#partner" className="btn btn--ghost">できることを見る</a>
+          <a href="#diagnosis" className="btn btn--primary">無料診断を選ぶ</a>
+          <a href="#diagnosis" className="btn btn--ghost">有料診断を選ぶ</a>
         </div>
 
-        <p className="hero-terms">月額 30,000円から ／ 初期費用 0円 ／ 3ヶ月単位のご契約から</p>
+        <p className="hero-terms">まず、採用の現在地をどこまで調べるかお選びください</p>
       </div>
 
       <a href="#forms" className="hero-scroll" aria-label="次のセクションへ">

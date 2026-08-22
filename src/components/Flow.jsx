@@ -3,23 +3,23 @@ import SectionHead from './SectionHead'
 const STEPS = [
   {
     when: '初回',
-    what: '採用ページを見て、気づいたことのご報告',
-    detail: '求人が検索で認識される形になっているかを、実際のページで確認します。',
+    what: '無料診断または有料診断を選ぶ',
+    detail: 'まず土台を見るか、外部依存比率と原因まで測るかをお選びいただきます。',
   },
   {
     when: '〜2週間',
-    what: '市場・競合・自社の実測',
-    detail: '商圏の労働供給、競合の条件と書き方、自社の露出をまとめます。',
+    what: '拠点の現在地と優先順位を決める',
+    detail: '市場・競合・自社を測り、検索・地図・SNS・応募導線のどこから着手するかを決めます。',
   },
   {
     when: '着手時',
-    what: '採用ページのご用意',
-    detail: '別のドメインに新設します（現行のサイトは触りません／約1〜2ヶ月）。求人の取り込み設定と原稿整備まで行います。',
+    what: '必要な採用経路を整える',
+    detail: 'SEO・MEO・SNS、採用ページ、求人原稿、応募フォームから必要な施策だけを実行します。',
   },
   {
     when: '毎月',
-    what: '手入れとご報告',
-    detail: '原稿の書き換え、競合の定点観測、応募データの整理と月次のご報告。',
+    what: '自社経路の比率を測り、改善する',
+    detail: '応募・採用経路を毎月確認し、効かない施策を止め、動いた施策へ寄せます。',
   },
 ]
 
@@ -27,9 +27,9 @@ export default function Flow() {
   return (
     <section id="flow" className="section section--alt">
       <div className="container">
-        <SectionHead idx="05" en="Process" />
-        <h2 className="section-title">はじめのご報告から、月次の手入れまで</h2>
-        <p className="section-sub">初回のご報告から、ご契約後の運用までの流れです。</p>
+        <SectionHead idx="06" en="Process" />
+        <h2 className="section-title">診断から、拠点の自走化まで</h2>
+        <p className="section-sub">診断し、優先順位を決め、必要な経路を整え、外部依存比率の変化を見ます。</p>
 
         <ol style={{ display: 'grid', gap: 20, marginTop: 44, listStyle: 'none' }}>
           {STEPS.map((s, i) => (

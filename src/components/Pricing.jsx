@@ -32,9 +32,9 @@ export default function Pricing() {
   return (
     <section id="pricing" className="section">
       <div className="container">
-        <SectionHead idx="06" en="Pricing" />
-        <h2 className="section-title">対象拠点の数で決まる費用</h2>
-        <p className="section-sub">支援の対象に含める事業所を、ご契約のときに名前で挙げて数えます。</p>
+        <SectionHead idx="07" en="Pricing" />
+        <h2 className="section-title">診断後の実行・伴走支援</h2>
+        <p className="section-sub">月額支援は、対象に含める拠点を名前で挙げ、必要な施策範囲を決めて始めます。</p>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 20, marginTop: 40 }}>
           {STATS.map((s) => <Stat key={s.k} s={s} />)}
@@ -42,7 +42,7 @@ export default function Pricing() {
 
         {/* 2026-08-04: 1文目が section-sub の言い直しだったので落とし、見積りの条件だけ残した。 */}
         <div className="note">
-          対象の範囲によって作業量が変わるため、<strong>拠点数と職種数</strong>を伺ったうえでお見積りします。
+          対象の範囲によって作業量が変わるため、<strong>拠点数・職種数・SNSを含む支援領域</strong>を伺ったうえでお見積りします。有料診断の費用は別途です。
         </div>
 
         <p style={{ marginTop: 18, fontSize: '0.84rem', color: 'var(--text-dim)' }}>

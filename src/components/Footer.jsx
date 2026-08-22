@@ -37,11 +37,12 @@ export default function Footer() {
           </div>
 
           <ul style={{ display: 'grid', gap: 10, fontSize: '0.88rem', color: 'var(--text-muted)' }}>
-            <li><a href="#partner">できること</a></li>
+            <li><a href="#partner">自社の採用経路</a></li>
             <li><a href="#method">調べ方</a></li>
+            <li><a href="#diagnosis">無料・有料診断</a></li>
             <li><a href="#chat">HRチャット</a></li>
             <li><a href="#pricing">費用</a></li>
-            <li><a href="#contact">お問い合わせ</a></li>
+            <li><a href="#contact">診断を選ぶ</a></li>
             <li>
               <a href={PRIVACY_URL} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent-dark)' }}>
                 プライバシーポリシー
