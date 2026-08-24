@@ -89,12 +89,12 @@ export default function Hero() {
         <p className="hero-kicker">HR PARTNER ／ 拠点単位の採用自走化支援</p>
 
         <h1 className="hero-h1">
-          <span className="hero-mask hero-line"><span>外部依存の高い拠点に、</span></span>
-          <span className="hero-mask hero-line"><span>採用の自走力を。</span></span>
+          <span className="hero-mask hero-line"><span>応募を買い続ける採用から、</span></span>
+          <span className="hero-mask hero-line"><span>応募が積み上がる採用へ。</span></span>
         </h1>
 
         <p className="hero-lead">
-          求人媒体・人材紹介に頼りきった採用を、拠点から変えていきます。
+          検索・地図・SNSから、自社に応募が届く経路を拠点ごとに育てます。
         </p>
 
         {/* 2026-08-04: 「何の商品か一目瞭然にしたい」（ご指示）への対応。
