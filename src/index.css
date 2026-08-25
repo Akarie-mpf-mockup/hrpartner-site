@@ -452,9 +452,9 @@ main > section:nth-of-type(odd) { padding-top: 184px; padding-bottom: 184px; }
 .hero-lead {
   margin: 22px auto 0;
   max-width: 46ch;
-  font-size: 0.98rem;
+  font-size: clamp(1.08rem, 1.6vw, 1.25rem);
   color: var(--text-muted);
-  line-height: 2.05;
+  line-height: 1.9;
 }
 
 /* 納品物の3点（2026-08-04）。

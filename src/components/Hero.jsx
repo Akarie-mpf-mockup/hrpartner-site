@@ -89,8 +89,7 @@ export default function Hero() {
         <p className="hero-kicker">HR PARTNER ／ 拠点単位の採用自走化支援</p>
 
         <h1 className="hero-h1">
-          <span className="hero-mask hero-line"><span>応募を買い続ける採用から、</span></span>
-          <span className="hero-mask hero-line"><span>応募が積み上がる採用へ。</span></span>
+          <span className="hero-mask hero-line"><span>自社にも応募が届く採用へ。</span></span>
         </h1>
 
         <p className="hero-lead">
