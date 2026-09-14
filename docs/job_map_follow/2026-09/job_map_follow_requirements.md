@@ -320,7 +320,7 @@ Artifact（画面イメージ）と要件の用語をそろえるため、実装
 - 置き場所はシート内の最上部（比較バーと同じ面）。
   `front-react-recruit/src/components/CompanyList.jsx:258` の `{compareBar}` と同じ位置に、
   同じ `sticky` の作りで置く（`front-react-recruit/src/App.css:96` の `.jm-compare-bar` が手本）。
-  **地図の上に浮かせない**——`front-react-recruit/src/App.jsx:671-675` のコメントが
+  **地図の上に浮かせない**——`front-react-recruit/src/App.jsx:819`(`FR-M3`) のコメントが
   「帯として積むと地図が下へ押し出される」ことを実測付きで戒めている。
 - 各条件には**その条件で今ヒットする件数**を添える（フォロワー数ではない。§3.4）。
 
@@ -366,10 +366,26 @@ Artifact（画面イメージ）と要件の用語をそろえるため、実装
   **既存テーブルへの列追加は `.claude/skills/README.md` が言及する P22 の対象**であり、
   移行手順を要件に含める必要がある。
 
-#### FR-B3: 比較の永続化
-- `front-react-recruit/src/App.jsx:776-785` の `compareKeys` は現状ページ内 state として扱われている。
-  再訪時に復元する。⚠ 復元してよいかは判断が要る（前回の比較を勝手に復活させると
-  「消したはずのものが戻る」と読まれうる）。**§6 Q2 に含める。**
+#### ~~FR-B3: 比較の永続化~~ → **【訂正 2026-09-14】既に実装済み。スコープ外** ✅
+
+本文書の初稿は「`compareKeys` は現状ページ内 state として扱われている。再訪時に復元する」と書いたが、
+**これは誤りだった。** 比較選択は既に localStorage で永続化・復元されている。
+
+| 対象 | 実際の状態 | 出典 |
+|---|---|---|
+| 保存キーの定義 | `COMPARE_STORAGE_KEY = 'hrm-job-map-compare-v1'` | `front-react-recruit/src/App.jsx:79`(`COMPARE_STORAGE_KEY`) ✅ |
+| 起動時の復元 | `useState(readStoredCompare)` で初期値として読む | `front-react-recruit/src/App.jsx:189`(`readStoredCompare`) ✅ |
+| 変更時の保存 | `compareKeys` が変わるたび `setItem` する | `front-react-recruit/src/App.jsx:600`(`COMPARE_STORAGE_KEY`) ✅ |
+
+したがって **FR-B3 は新規実装しない**（`.claude/skills/README.md` 禁止事項6
+「既存コンポーネントを再実装しない」）。§6.1 Q2-3 の「前回の比較選択を再訪時に復元する」という
+回答は、**既に満たされている**。
+
+> **なぜ間違えたか（記録）**: 初稿は `front-react-recruit/src/App.jsx`（`CompanyList` へ
+> `compareKeys` を渡している箇所）だけを見て「ページ内 state」と判断し、**初期化と保存の箇所を
+> 確認していなかった**。同じファイルの中で、値の受け渡し箇所と永続化箇所が 600 行以上離れている。
+> `.claude/skills/README.md` 禁止事項13（否定形の主張には grep の根拠と件数を併記する）は
+> 「無い」と書く場合の規律だが、**「実装されていない」も否定形の主張**であり、同じ検証が要った。
 
 ---
 
@@ -506,7 +522,8 @@ Artifact（画面イメージ）と要件の用語をそろえるため、実装
 |---|---|
 | FR-A1（条件の保存）/ FR-A2（保存した条件の表示） | **着手できる**。Q3 に依存しない |
 | FR-A3（新着通知） | ⚠ **Q3 の実測待ち**。`indexed_at` が夜間再構築で更新されるなら、再構築のたびに全条件へ通知が飛ぶ |
-| FR-B1（続きから・localStorage） / FR-B3（比較の復元） | **着手できる**。Q2-3 で復元が確定 |
+| FR-B1（続きから・localStorage） | **着手できる**。Q2-3 に依存しない |
+| ~~FR-B3（比較の復元）~~ | **不要**。既に実装済み（§4.3 の訂正を参照）。Q2-3 の回答は既に満たされている |
 | FR-B2（サーバ側の読み出し口） | `MapDiscoveryEvent` への `visitor_key` 列追加の可否から。移行手順が要る |
 | FR-C1 / FR-C2（おすすめ） | ⚠ 先行文書 §6.2 Q2（初期表示が全国か結果のある範囲か）が未回答のまま。**先にそちらの確定が要る** |
 
