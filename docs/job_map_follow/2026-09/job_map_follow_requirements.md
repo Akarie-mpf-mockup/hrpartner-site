@@ -168,7 +168,7 @@ job_map ではその 2 つが**既に両方そろっている**（§2.1）。こ
 📄 先行文書 §2.2.2 によれば、未来条件プロファイル・比較選択・訪問者キー・コーチマーク既読は
 localStorage、表示条件（フィルタ・選択会社・中心/zoom）は URL クエリに置かれている。
 
-**注意**: `front-react-recruit/src/App.jsx:990-1000`(`条件を共有`) の「条件を共有」は
+**注意**: `front-react-recruit/src/App.jsx:997`(`条件を共有`) の「条件を共有」は
 `history.replaceState` で URL を書き換えてクリップボードへコピーする。
 **条件の持ち出しは URL 経由でできるが、「この端末に名前を付けて残す」手段は無い。**
 
@@ -212,12 +212,12 @@ Artifact（画面イメージ）と要件の用語をそろえるため、実装
 | 位置 | 実ラベル | 出典 |
 |---|---|---|
 | ヘッダー | `HRモンスター` + `Recruit` | `front-react-recruit/src/App.jsx:628` |
-| 見出し | `会社・勤務地から探す` | `front-react-recruit/src/App.jsx:872`(`jm-title`) |
+| 見出し | `会社・勤務地から探す` | `front-react-recruit/src/App.jsx:869`(`jm-title`) |
 | ピル | `絞り込み` | `front-react-recruit/src/App.jsx:695` |
 | 絞り込み | `地域` / `職種` / `市区町村`、既定値は `全国` / `すべて` / `すべて` | `front-react-recruit/src/App.jsx:707-726` |
 | トグル | `未経験歓迎` / `リモート可` / `正社員` | `front-react-recruit/src/lib/bboxQuery.js:6-10` |
-| 表示切替 | `一覧で見る` / `地図で見る` | `front-react-recruit/src/App.jsx:990`(`showMap`) |
-| 共有 | `条件を共有` → 通知 `URLをコピーしました` | `front-react-recruit/src/App.jsx:756-758` |
+| 表示切替 | `一覧で見る` / `地図で見る` | `front-react-recruit/src/App.jsx:987`(`showMap`) |
+| 共有 | `条件を共有` → 通知 `URLをコピーしました` | `front-react-recruit/src/App.jsx:995`(`URLをコピーしました`) |
 | 地図下 | `この範囲を検索` | `front-react-recruit/src/App.jsx:768` |
 | カード | `募集中の求人 {n}件` / `主な職種：{…}` | `front-react-recruit/src/components/CompanyList.jsx:92` / `:95` |
 | カード CTA | `この会社の求人を見る` / `希望条件から案内してもらう` / `比較する`（押下時 `比較から外す`）/ `💬 応募前に相談する` | `front-react-recruit/src/components/CompanyList.jsx:110` / `:123` / `:126` / `:136` |
@@ -318,10 +318,17 @@ Artifact（画面イメージ）と要件の用語をそろえるため、実装
 #### FR-A2: 保存した条件を出す
 
 - 置き場所はシート内の最上部（比較バーと同じ面）。
-  `front-react-recruit/src/components/CompanyList.jsx:258` の `{compareBar}` と同じ位置に、
-  同じ `sticky` の作りで置く（`front-react-recruit/src/App.css:96` の `.jm-compare-bar` が手本）。
-  **地図の上に浮かせない**——`front-react-recruit/src/App.jsx:819`(`FR-M3`) のコメントが
+  `front-react-recruit/src/components/CompanyList.jsx:258` の `{compareBar}` と同じ位置に置く。
+  **地図の上に浮かせない**——`front-react-recruit/src/App.jsx:910`(`FR-M3`) のコメントが
   「帯として積むと地図が下へ押し出される」ことを実測付きで戒めている。
+- **【改定 2026-09-15】`sticky` にはしない。**
+  当初は `front-react-recruit/src/App.css:96` の `.jm-compare-bar` と同じ `sticky` を
+  指示していたが、実装時に取りやめた。このシートには保存の帯・続きからの帯・比較バーの
+  **3 つ**が縦に並ぶため、3 つとも `sticky` にすると一覧をスクロールしたとき上に積み上がり、
+  カードの見える高さを食い尽くして、既存の比較バーが保存の帯に覆われる。
+  `sticky` を保てるのは 1 つだけで、その 1 つは既存の比較バーのまま据え置く。
+  （この食い違いは Adversarial Review 2巡目 m-6 が「実装コメントにしか残っていない」と
+  指摘したもの。確定事項と実装が割れたままにしない）
 - 各条件には**その条件で今ヒットする件数**を添える（フォロワー数ではない。§3.4）。
 
 #### FR-A3: 新着を知らせる
@@ -373,9 +380,9 @@ Artifact（画面イメージ）と要件の用語をそろえるため、実装
 
 | 対象 | 実際の状態 | 出典 |
 |---|---|---|
-| 保存キーの定義 | `COMPARE_STORAGE_KEY = 'hrm-job-map-compare-v1'` | `front-react-recruit/src/App.jsx:85`(`COMPARE_STORAGE_KEY`) ✅ |
-| 起動時の復元 | `useState(readStoredCompare)` で初期値として読む | `front-react-recruit/src/App.jsx:205`(`readStoredCompare`) ✅ |
-| 変更時の保存 | `compareKeys` が変わるたび `setItem` する | `front-react-recruit/src/App.jsx:704`(`COMPARE_STORAGE_KEY`) ✅ |
+| 保存キーの定義 | `COMPARE_STORAGE_KEY = 'hrm-job-map-compare-v1'` | `front-react-recruit/src/App.jsx:88`(`COMPARE_STORAGE_KEY`) ✅ |
+| 起動時の復元 | `useState(readStoredCompare)` で初期値として読む | `front-react-recruit/src/App.jsx:217`(`readStoredCompare`) ✅ |
+| 変更時の保存 | `compareKeys` が変わるたび `setItem` する | `front-react-recruit/src/App.jsx:701`(`COMPARE_STORAGE_KEY`) ✅ |
 
 したがって **FR-B3 は新規実装しない**（`.claude/skills/README.md` 禁止事項6
 「既存コンポーネントを再実装しない」）。§6.1 Q2-3 の「前回の比較選択を再訪時に復元する」という
@@ -516,7 +523,7 @@ Artifact（画面イメージ）と要件の用語をそろえるため、実装
 | 復元用 | `map_view_json`（緯度経度・zoom） | **`zoom_band` の 3 値のみ**（広域／市区町村／街区） |
 | 復元の実体 | 保存した座標へ飛ぶ | **読むときに算出**した代表点へ飛ぶ |
 
-代表点は `SavedSearchView._restore_view` が、条件に一致する `RecruitJobIndex` の座標を
+代表点は `SavedSearchView._hits_and_view` が、条件に一致する `RecruitJobIndex` の座標を
 集約して返す。**自社の索引から作る値**なので MapTiler の制約に触れない。
 条件に合う求人が 0 件なら `null` を返し、その場合フロントは地図を動かさない
 （「保存した条件を開いたら知らない場所へ飛んだ」を作らない）。
@@ -605,15 +612,22 @@ Q1〜Q3 の回答（とくに Q2-1 の「照合用と復元用を分ける」判
 
 | 対象 | 実行内容 | 結果 |
 |---|---|---|
-| front-react-recruit ユニット | `vitest run`（CI の `recruit-unit` 列挙 28 ファイル） | 395 件 緑 |
+| front-react-recruit ユニット | `vitest run`（CI の `recruit-unit` 列挙 28 ファイル） | 402 件 緑 |
 | front-react-recruit ビルド | `npm run build`（`NODE_ENV=production`） | 成功 |
 | CI 列挙の整合 | `yaml.safe_load` で `recruit-unit` の列挙を抽出し、`src/lib/__tests__/` の実ファイルと突き合わせ | 28/28 一致・重複なし |
-| 追加テストの有効性 | 各修正を 1 つずつ元に戻す mutation を当て、**対応するテストが赤くなること**を確認（13 件） | 全件で検知 |
+| 追加テストの有効性 | 各修正を 1 つずつ元に戻す mutation を当て、**対応するテストが赤くなること**を確認（21 件） | 全件で検知 |
+| back の契約テスト | Django を使わない照合部分だけを素の Python で再実行（front の定数 ⇔ サーバ定数） | 全件一致 |
 
-⚠ mutation で 1 件、**当初のテストが欠陥を捕まえられていなかった**ことが判明した
-（`peekVisitorKey` の「発行しない」検査。node 環境では `window` が無く、発行側へ
-退行させても例外→ catch で同じ `''` が返るため、常に緑になっていた）。
-`window.crypto` を用意してから見る形に直し、再度 mutation で検知を確認した。
+⚠ mutation で **2 件**、当初のテストが欠陥を捕まえられていなかったことが判明した。
+いずれも「テストは緑だが、検査したい経路を 1 度も通っていない」型である。
+
+1. `peekVisitorKey` の「発行しない」検査。node 環境では `window` が無いため、
+   発行側へ退行させても例外→ catch で同じ `''` が返り、常に緑だった。
+2. 保存失敗の分類（429 / 4xx / 通信断）を実際の例外で見る検査。`postJson` が
+   CSRF ヘッダのために `document.cookie` を読むが、node 環境には `document` が無く、
+   `ReferenceError` が先に出て**すべて「通信断」に分類**されていた。
+
+どちらも必要なグローバルを用意してから見る形に直し、再度 mutation で検知を確認した。
 **テストを足したことと、そのテストが効いていることは別**という実例として残す。
 
 ### 9.2 実行していないもの（＝根拠が無いもの）
@@ -637,6 +651,7 @@ Q1〜Q3 の回答（とくに Q2-1 の「照合用と復元用を分ける」判
 | 1 | orchestrator が規模判定（6 条件中 4 該当＝大規模）→ 役割別レビュー 6 並列 | 全 NG・重複排除後ブロッカー 9 件 |
 | 2 | 根本原因検証 ×3 | 3 件（`NameError` を起こす stale な定数参照、削除 API の契約と実装のずれ、自分で入れた N+1） |
 | 3 | Adversarial Review（Deep） | ブロッカー 1 / Major 7 / minor 8 |
+| 4 | 修正後に **Adversarial Review 2 巡目**（別コンテキスト） | ブロッカー 1 / Major 2 / minor 9 |
 
 ⚠ 回 3 のブロッカー（B-1）は、**`useCallback` の依存配列が同じスコープの後方で宣言された
 `const` を参照していたため、`App()` がレンダー冒頭で TDZ の `ReferenceError` を投げ、
@@ -646,6 +661,29 @@ Q1〜Q3 の回答（とくに Q2-1 の「照合用と復元用を分ける」判
 （配線の検査を `fs.readFileSync(App.jsx)` のソース文字列で代用していた）。
 再発防止として `src/lib/__tests__/appBoots.test.jsx` を追加し、CI の `recruit-unit`
 列挙の**先頭**に置いた。列挙に無いテストは置くだけでは走らない。
+
+#### 2 巡目のブロッカー: 自分の修正が、自分の契約テストを壊していた
+
+minor 指摘（front の `TEXT_FILTER_KEYS` が 3 箇所に複製されている）を直して
+`bboxQuery.js` の 1 本に寄せたところ、**サーバ側の契約テストが
+`back/recruit_index/tests/test_saved_search.py` で `IndexError` を出す状態**になった。
+そのテストは `savedSearchState.js` に配列リテラルがある前提で
+`re.findall(...)[0]` と書いており、配列が別ファイルへ移ったことで 0 件マッチになる。
+
+原因は、修正時に**呼び出し元の洗い出しを JS 側だけで済ませた**こと
+（`grep -rn "TEXT_FILTER_KEYS" src/ tests/`）。同じ定数を Python から
+正規表現で読んでいる箇所を数えていなかった。禁止事項10（全ての呼び出し元を列挙）は
+言語をまたいで適用しなければならない、という形で記録する。
+
+しかもこの壊れ方は failure ではなく **error** なので、
+「front と back の語彙が一致していること」という**本題そのものが 1 度も検証されない**まま
+backend-test が赤になる。対処として:
+
+- 照合先を正本（`bboxQuery.js`）へ移した
+- `re.findall(...)[0]` を直接書かず、`_front_array()` 経由にした。
+  当たらなかったときは「定義を移したなら参照先も移すこと」という**その旨の失敗**を出す
+- `savedSearchState.js` が独自の配列を**持たない**ことも同時に検査する
+  （再輸出であることを固定する）
 
 ---
 
