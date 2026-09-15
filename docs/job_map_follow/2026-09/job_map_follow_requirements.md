@@ -168,7 +168,7 @@ job_map ではその 2 つが**既に両方そろっている**（§2.1）。こ
 📄 先行文書 §2.2.2 によれば、未来条件プロファイル・比較選択・訪問者キー・コーチマーク既読は
 localStorage、表示条件（フィルタ・選択会社・中心/zoom）は URL クエリに置かれている。
 
-**注意**: `front-react-recruit/src/App.jsx:750-758` の「条件を共有」は
+**注意**: `front-react-recruit/src/App.jsx:990-1000`(`条件を共有`) の「条件を共有」は
 `history.replaceState` で URL を書き換えてクリップボードへコピーする。
 **条件の持ち出しは URL 経由でできるが、「この端末に名前を付けて残す」手段は無い。**
 
@@ -212,11 +212,11 @@ Artifact（画面イメージ）と要件の用語をそろえるため、実装
 | 位置 | 実ラベル | 出典 |
 |---|---|---|
 | ヘッダー | `HRモンスター` + `Recruit` | `front-react-recruit/src/App.jsx:628` |
-| 見出し | `会社・勤務地から探す` | `front-react-recruit/src/App.jsx:630` |
+| 見出し | `会社・勤務地から探す` | `front-react-recruit/src/App.jsx:872`(`jm-title`) |
 | ピル | `絞り込み` | `front-react-recruit/src/App.jsx:695` |
 | 絞り込み | `地域` / `職種` / `市区町村`、既定値は `全国` / `すべて` / `すべて` | `front-react-recruit/src/App.jsx:707-726` |
 | トグル | `未経験歓迎` / `リモート可` / `正社員` | `front-react-recruit/src/lib/bboxQuery.js:6-10` |
-| 表示切替 | `一覧で見る` / `地図で見る` | `front-react-recruit/src/App.jsx:748` |
+| 表示切替 | `一覧で見る` / `地図で見る` | `front-react-recruit/src/App.jsx:990`(`showMap`) |
 | 共有 | `条件を共有` → 通知 `URLをコピーしました` | `front-react-recruit/src/App.jsx:756-758` |
 | 地図下 | `この範囲を検索` | `front-react-recruit/src/App.jsx:768` |
 | カード | `募集中の求人 {n}件` / `主な職種：{…}` | `front-react-recruit/src/components/CompanyList.jsx:92` / `:95` |
@@ -235,9 +235,9 @@ Artifact（画面イメージ）と要件の用語をそろえるため、実装
 | 主色（ピル枠・塗り） | `#0b7668`、文字色 `#0b665b` | `front-react-recruit/src/App.css:46` / `:60` |
 | カード | 枠 `#e0e0e0` / 角 8px / 13px | `front-react-recruit/src/App.css:387-391` |
 | 選択中カード | 枠 `#c5221f` + 内側1px | `front-react-recruit/src/App.css:396-397` |
-| 主 CTA | 枠・文字とも `#e8710a`、角 4px | `front-react-recruit/src/App.css:455-457` |
-| 副導線 | `#0b665b` の下線リンク、最低高さ 44px | `front-react-recruit/src/App.css:473-479` |
-| 本文 / 補助 / ヒント | `#333` / `#555` / `#888` | `front-react-recruit/src/App.css:12` / `:434` / `:444` |
+| 主 CTA | 枠・文字とも `#e8710a`、角 4px | `front-react-recruit/src/App.css:464-466`(`border`) |
+| 副導線 | `#0b665b` の下線リンク、最低高さ 44px | `front-react-recruit/src/App.css:478-489`(`jm-nav-cta`) |
+| 本文 / 補助 / ヒント | `#333` / `#555` / `#888` | `front-react-recruit/src/App.css:12`(`color`) / `:443`(`jm-card-location`) / `:453`(`jm-card-hint`) |
 | フォント | `'Hiragino Kaku Gothic ProN', 'Noto Sans JP', Meiryo, sans-serif` | `front-react-recruit/src/App.css:11` |
 
 ---
@@ -373,9 +373,9 @@ Artifact（画面イメージ）と要件の用語をそろえるため、実装
 
 | 対象 | 実際の状態 | 出典 |
 |---|---|---|
-| 保存キーの定義 | `COMPARE_STORAGE_KEY = 'hrm-job-map-compare-v1'` | `front-react-recruit/src/App.jsx:79`(`COMPARE_STORAGE_KEY`) ✅ |
-| 起動時の復元 | `useState(readStoredCompare)` で初期値として読む | `front-react-recruit/src/App.jsx:189`(`readStoredCompare`) ✅ |
-| 変更時の保存 | `compareKeys` が変わるたび `setItem` する | `front-react-recruit/src/App.jsx:600`(`COMPARE_STORAGE_KEY`) ✅ |
+| 保存キーの定義 | `COMPARE_STORAGE_KEY = 'hrm-job-map-compare-v1'` | `front-react-recruit/src/App.jsx:85`(`COMPARE_STORAGE_KEY`) ✅ |
+| 起動時の復元 | `useState(readStoredCompare)` で初期値として読む | `front-react-recruit/src/App.jsx:205`(`readStoredCompare`) ✅ |
+| 変更時の保存 | `compareKeys` が変わるたび `setItem` する | `front-react-recruit/src/App.jsx:704`(`COMPARE_STORAGE_KEY`) ✅ |
 
 したがって **FR-B3 は新規実装しない**（`.claude/skills/README.md` 禁止事項6
 「既存コンポーネントを再実装しない」）。§6.1 Q2-3 の「前回の比較選択を再訪時に復元する」という
@@ -587,6 +587,65 @@ Q1〜Q3 の回答（とくに Q2-1 の「照合用と復元用を分ける」判
 - 通知メールの送信基盤に何を使うか（既存の応募・相談のメール経路を流用できるかは未調査）
 - `front-react-recruit/src/App.css` のうち Read で確認したのは 1-100 / 380-479 行。
   それ以外の値（チップ・シート・ロボ顔・相談 CTA・ピルバー）は **grep で内容を確認したが Read していない**
+- ⚠ **サーバ側（`back/`）のテストは本セッションで 1 度も実行していない。**
+  `back/recruit_index/tests/test_saved_search.py` は `python -m py_compile` が通ることしか
+  確かめていない。理由は §9 に記す。緑であることの根拠は**まだ無い**。
+- 画面の実機表示（追加した `.jm-saved-note` / `.jm-resume-clear` が
+  畳んだシートの高さを圧迫しないか）は jsdom では測れない。
+  `recruit-map-layout`（Playwright）の対象ルートは `#/` のみで、
+  本変更の帯はそこに出るため CI で測れるが、**本セッションでは未実行**
+
+---
+
+## 9. 検証の実施状況（2026-09-15 時点）
+
+「どこまで確かめたか」と「確かめていないか」を、結果と同じ場所に残す。
+
+### 9.1 実行して緑になったもの
+
+| 対象 | 実行内容 | 結果 |
+|---|---|---|
+| front-react-recruit ユニット | `vitest run`（CI の `recruit-unit` 列挙 28 ファイル） | 395 件 緑 |
+| front-react-recruit ビルド | `npm run build`（`NODE_ENV=production`） | 成功 |
+| CI 列挙の整合 | `yaml.safe_load` で `recruit-unit` の列挙を抽出し、`src/lib/__tests__/` の実ファイルと突き合わせ | 28/28 一致・重複なし |
+| 追加テストの有効性 | 各修正を 1 つずつ元に戻す mutation を当て、**対応するテストが赤くなること**を確認（13 件） | 全件で検知 |
+
+⚠ mutation で 1 件、**当初のテストが欠陥を捕まえられていなかった**ことが判明した
+（`peekVisitorKey` の「発行しない」検査。node 環境では `window` が無く、発行側へ
+退行させても例外→ catch で同じ `''` が返るため、常に緑になっていた）。
+`window.crypto` を用意してから見る形に直し、再度 mutation で検知を確認した。
+**テストを足したことと、そのテストが効いていることは別**という実例として残す。
+
+### 9.2 実行していないもの（＝根拠が無いもの）
+
+| 対象 | なぜ実行できないか |
+|---|---|
+| `manage.py test recruit_index` | CI（`lint.yml` の `backend-test`）は **Python 3.9 + MySQL 8** を前提とし、`libmysqlclient` / mecab / wkhtmltopdf / tesseract / ffmpeg を apt で入れている。本セッションのコンテナに Python 3.9 は無く（3.10〜3.13 のみ）、`numpy==1.19.5` は cp310 以降のホイールが無いためソースビルドが `_Py_HashDouble` のシグネチャ変更で失敗する。MySQL サービスも無い |
+| `recruit-map-layout`（Playwright） | 上と同じくローカル実行していない。CI で走る |
+
+したがって**サーバ側の正しさは、CI が初めて検証する**。
+`recruit_index` は `.github/workflows/lint.yml:336` の `manage.py test` 列挙に含まれており
+（`chatbot directtalk rag users wait4 recruit recruit_index virtualoffice employmentpage`）、
+`back/recruit_index/tests/__init__.py` も存在するため、追加した
+`test_saved_search.py`（33 件）は discover される。**走ること自体は確認済み、
+通ることは未確認。**
+
+### 9.3 レビューの経緯
+
+| 回 | 内容 | 結果 |
+|---|---|---|
+| 1 | orchestrator が規模判定（6 条件中 4 該当＝大規模）→ 役割別レビュー 6 並列 | 全 NG・重複排除後ブロッカー 9 件 |
+| 2 | 根本原因検証 ×3 | 3 件（`NameError` を起こす stale な定数参照、削除 API の契約と実装のずれ、自分で入れた N+1） |
+| 3 | Adversarial Review（Deep） | ブロッカー 1 / Major 7 / minor 8 |
+
+⚠ 回 3 のブロッカー（B-1）は、**`useCallback` の依存配列が同じスコープの後方で宣言された
+`const` を参照していたため、`App()` がレンダー冒頭で TDZ の `ReferenceError` を投げ、
+`/job_map/` が全ルート白画面になる**というものだった。
+そのとき既存ユニットテストは 373 件すべて緑、`vite build` も成功していた。
+原因は **App を一度でも実行するテストが無かった**こと
+（配線の検査を `fs.readFileSync(App.jsx)` のソース文字列で代用していた）。
+再発防止として `src/lib/__tests__/appBoots.test.jsx` を追加し、CI の `recruit-unit`
+列挙の**先頭**に置いた。列挙に無いテストは置くだけでは走らない。
 
 ---
 
